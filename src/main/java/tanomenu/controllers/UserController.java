@@ -1,49 +1,42 @@
 package tanomenu.controllers;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import tanomenu.models.User;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import tanomenu.repository.UserRepository;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Optional;
+import javax.validation.Valid;
+import java.util.*;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    private List<User> users = new ArrayList<>();
+    private final UserRepository userRepository;
 
-    @PostMapping("/")
-    public HttpStatus setUser(@RequestBody User user) {
-        Long lastId = (long) users.toArray().length + 1;
-        user.setId(lastId);
-        if(!user.notComplete()) {
-            users.add(user);
-            return HttpStatus.CREATED;
-        }
-
-        return HttpStatus.BAD_REQUEST;
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    @GetMapping("/")
-    public List<User> getAll() {
-        if(!users.isEmpty()) {
-            return users;
-        }
-
-        return null;
+    @PostMapping
+    public ResponseEntity<?> setUser(@Valid @RequestBody User user) {
+        return ResponseEntity.ok(userRepository.save(user));
     }
 
-    @GetMapping("/{id}")
-    public User getOne(@PathVariable("id") Long id) {
-        Optional<User> userFind = users.stream().filter(user -> user.getId().equals(id)).findFirst();
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(userRepository.findAll());
+    }
 
-        if (userFind.isPresent()) {
-            return userFind.get();
-        }
+    @GetMapping("/{uuid}")
+    public ResponseEntity<User> getUser(@PathVariable UUID uuid) {
+        return ResponseEntity.of(userRepository.find(uuid));
+    }
 
-        return null;
+    @DeleteMapping("/{uuid}")
+    public void deleteUser(@PathVariable UUID uuid) {
+        userRepository.delete(uuid);
     }
 }
