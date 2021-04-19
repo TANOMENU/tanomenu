@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+    <head th:fragment="head(title)">
+        <meta charset="utf-8" />
+        <title th:replace="${title}">TANOMENU</title>
+        <link href="/css/style.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header th:fragment="header">
+            <a href="#"><img src="/img/logo.png"></a>
+        </header>
+
+        <h1>Hello World!!!</h1>
+
+        <footer th:fragment="footer">
+            Todos os direitos reservados - 2021 &copy;
+        </footer>
+    </body>
+</html>
