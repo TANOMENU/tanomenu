@@ -4,11 +4,12 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 import java.util.UUID;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Builder(toBuilder = true)
 public class User {
 
@@ -30,7 +31,10 @@ public class User {
     @NotBlank
     private String cpf;
 
-    public boolean notComplete(){
+    // TODO aqui poderia ser uma lista de restaurantes
+    private Restaurant restaurant;
+
+    public boolean notComplete() {
         return (name == null)||(email == null)||(password == null);
     }
 
@@ -41,5 +45,4 @@ public class User {
         this.location = user.getLocation();
         this.cpf = user.getCpf();
     }
-
 }
