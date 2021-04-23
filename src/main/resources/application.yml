@@ -3,3 +3,15 @@ spring:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: github-client-id
+            clientSecret: github-client-secret
+
+# TODO: Para conseguir o clientId e o clienteSecret precisa seguir os passos: github/settings/developers e clicar em new OAuth App
+# É por conta desse cara que conseguimos ativar a autenticação com o github
+  #(No caso como é para um trabalho da faculdade, podemos usar qualquer um dos nossos, mas em produção não seria muito seguro)
