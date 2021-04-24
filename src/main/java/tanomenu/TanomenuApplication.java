@@ -6,7 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class TanomenuApplication{
+public class TanomenuApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TanomenuApplication.class, args);
