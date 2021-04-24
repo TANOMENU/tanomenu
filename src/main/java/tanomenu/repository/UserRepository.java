@@ -43,4 +43,10 @@ public class UserRepository {
                 .collect(Collectors.toList());
     }
 
+    public Optional<User> findByEmail(String email) {
+        return users.stream()
+                .filter(u -> u.getEmail().equals(email))
+                .findFirst();
+    }
+
 }
