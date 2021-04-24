@@ -1,5 +1,6 @@
 package tanomenu.controllers;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,8 +17,11 @@ public class SignUpController {
 
     private final UserRepository userRepository;
 
-    public SignUpController(UserRepository userRepository) {
+    private final PasswordEncoder bCryptPasswordEncoder;
+
+    public SignUpController(UserRepository userRepository, PasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @GetMapping("/sign-up")
@@ -36,7 +40,7 @@ public class SignUpController {
         if(bindingResult.hasErrors())
             return "sign-up";
 
-        userRepository.save(user);
+        userRepository.save(user.toBuilder().password(bCryptPasswordEncoder.encode(user.getPassword())).build());
         return "redirect:/users";
     }
 
