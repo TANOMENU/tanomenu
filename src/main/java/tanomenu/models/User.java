@@ -5,9 +5,9 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Builder(toBuilder = true)
 public class User {
 
@@ -26,11 +26,13 @@ public class User {
     @NotBlank
     private String password;
 
+    // TODO aqui poderia ser uma lista de restaurantes
+    private Restaurant restaurant;
+
     public void update(User user) {
         this.name = user.getName();
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.cpf = user.getCpf();
     }
-
 }
