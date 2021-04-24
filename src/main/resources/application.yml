@@ -1,9 +1,4 @@
 spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/jsp/
-      suffix: .jsp
-
   security:
     oauth2:
       client:
