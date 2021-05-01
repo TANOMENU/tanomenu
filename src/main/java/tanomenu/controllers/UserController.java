@@ -10,7 +10,6 @@ import javax.validation.Valid;
 import java.util.*;
 
 @RestController
-// TODO Verificar com o grupo como serão as urls do projeto
 @RequestMapping("/users")
 public class UserController {
 
@@ -21,12 +20,11 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<?> setUser(@RequestBody User user) {
-        return ResponseEntity.ok(userRepository.save(user));
+    public User setUser(@RequestBody User user) {
+        return userRepository.find(user.getUuid());
     }
 
-    // TODO Verificar com o grupo melhores maneiras de validar se o uuid digitado na URL é válido
-    @PostMapping("/{uuid}")
+    @PutMapping("/{uuid}")
     public ResponseEntity<?> updateUser(@Valid @PathVariable UUID uuid, @RequestBody User user) {
         return ResponseEntity.ok(userRepository.update(uuid, user));
     }
@@ -40,8 +38,6 @@ public class UserController {
     public ResponseEntity<User> getUser(@PathVariable UUID uuid) {
         return ResponseEntity.of(userRepository.find(uuid));
     }
-
-
 
     @DeleteMapping("/{uuid}")
     public void deleteUser(@PathVariable UUID uuid) {
