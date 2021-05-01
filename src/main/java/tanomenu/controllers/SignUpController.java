@@ -1,5 +1,6 @@
 package tanomenu.controllers;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,7 @@ public class SignUpController {
     }
 
     @GetMapping("/sign-up")
+    @PreAuthorize("isAnonymous()")
     public String signUp(Model model) {
         model.addAttribute("user", new User());
         return "sign-up";
@@ -32,6 +34,7 @@ public class SignUpController {
     }
 
     @PostMapping("/sign-up")
+    @PreAuthorize("isAnonymous()")
     public String signUp(@ModelAttribute @Valid User user, BindingResult bindingResult) {
         userRepository.findByEmail(user.getEmail())
                 .ifPresent(u -> bindingResult.rejectValue("email",
