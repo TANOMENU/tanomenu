@@ -1,5 +1,9 @@
 # Getting Started
 
+### Login and registration pages
+![image](https://user-images.githubusercontent.com/60964439/116791338-f3aa4680-aa8f-11eb-9339-8f35ed5de2e1.png) ![image](https://user-images.githubusercontent.com/60964439/116791531-75e73a80-aa91-11eb-8ec9-cc08c454ad7a.png)
+
+
 ### Running
 To run this app
 
