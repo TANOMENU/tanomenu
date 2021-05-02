@@ -4,8 +4,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tanomenu.models.User;
 import tanomenu.repository.UserRepository;
+
 import javax.validation.Valid;
-import java.util.*;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -26,7 +27,7 @@ public class UserController {
     @PutMapping("/{uuid}")
     public String updateUser(Model model, @Valid @PathVariable UUID uuid, @RequestBody User user) {
         model.addAttribute("user", userRepository.update(uuid, user));
-        return "users/{uuid}";
+        return "users/" + uuid;
     }
 
     // TODO Tem necessidade?
@@ -36,14 +37,17 @@ public class UserController {
     }*/
 
     @GetMapping("/{uuid}")
-    public String getUser(@PathVariable UUID uuid, Model model) {
-        model.addAttribute("user", userRepository.find(uuid));
-        return "/users/{uuid}";
+    public String getUser(@PathVariable UUID uuid) {
+        var u = userRepository.find(uuid);
+        if (u.isPresent())
+            return "/users/" + uuid;
+
+        return "redirect:/login";
     }
 
     @DeleteMapping("/{uuid}")
     public String deleteUser(@PathVariable UUID uuid) {
         userRepository.delete(uuid);
-        return "redirect:/index";
+        return "redirect:/login";
     }
 }

@@ -2,14 +2,9 @@ package tanomenu.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import tanomenu.models.User;
 import tanomenu.repository.UserRepository;
-
-import javax.validation.Valid;
 
 @Controller
 public class LoginController {
@@ -20,11 +15,11 @@ public class LoginController {
         this.userRepository = userRepository;
     }
 
+    // TODO Pq esta signUp?
     @GetMapping("/login")
     public String signUp(Model model) {
         model.addAttribute("user", new User());
         return "login";
-
     }
 
 }

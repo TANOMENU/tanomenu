@@ -30,7 +30,7 @@ public class UserRepository {
         var result = users.stream()
                 .filter(u -> u.getUuid().equals(uuid))
                 .findFirst();
-        System.out.println(uuid+ " " +user);
+        System.out.println(uuid + " " + user);
         return result.map(u -> {
             u.update(user);
             return u.toBuilder().build();

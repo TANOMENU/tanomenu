@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
-    <head th:replace="base :: head(~{::title})">
-        <title>Criar uma Conta</title>
-    </head>
+<head th:replace="base :: head(~{::title})">
+    <title>Criar uma Conta</title>
+</head>
 
-    <body class="signup">
-        <header th:replace="base :: header"></header>
+<body class="signup">
+<header th:replace="base :: header"></header>
 
-        <main>
-            <h2>Criar uma Conta</h2>
+<main>
+    <h2>Criar uma Conta</h2>
 
-            <form action="#" th:action="@{/sign-up}" th:object="${user}" method="post">
-                <label class="field">
-                    Nome
-                    <input type="text" th:field="*{name}" />
-                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-                </label>
-                <label class="field">
-                    Email
-                    <input type="email" th:field="*{email}" />
-                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-                </label>
-                <label class="field">
-                    CPF
-                    <input type="text" th:field="*{cpf}" />
-                    <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
-                </label>
-                <label class="field">
-                    Senha
-                    <input type="password" th:field="*{password}" />
-                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-                </label>
-                <button type="submit" class="button">Continuar</button>
-            </form>
+    <form action="#" th:action="@{/sign-up}" th:object="${user}" method="post">
+        <label class="field">
+            Nome
+            <input type="text" th:field="*{name}"/>
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        </label>
+        <label class="field">
+            Email
+            <input type="email" th:field="*{email}"/>
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+        </label>
+        <label class="field">
+            CPF
+            <input type="text" th:field="*{cpf}"/>
+            <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
+        </label>
+        <label class="field">
+            Senha
+            <input type="password" th:field="*{password}"/>
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        </label>
+        <button type="submit" class="button">Continuar</button>
+    </form>
 
-            <a href="/login" class="link">Já tem uma conta?</a>
-        </main>
+    <a href="/login" class="link">Já tem uma conta?</a>
+</main>
 
-        <footer th:replace="base :: footer"></footer>
-    </body>
+<footer th:replace="base :: footer"></footer>
+</body>
 </html>

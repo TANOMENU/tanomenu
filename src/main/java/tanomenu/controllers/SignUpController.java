@@ -36,11 +36,11 @@ public class SignUpController {
                 .ifPresent(u -> bindingResult.rejectValue("email",
                         "email.already.exists", "Email já cadastrado"));
 
-        if(bindingResult.hasErrors())
+        if (bindingResult.hasErrors())
             return "sign-up";
 
         userRepository.save(user.toBuilder().password(bCryptPasswordEncoder.encode(user.getPassword())).build());
-        return "redirect:/users";
+        return "redirect:/login";
     }
 
 }

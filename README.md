@@ -1,20 +1,23 @@
 # Getting Started
 
 ### Login
-![image](https://user-images.githubusercontent.com/60964439/116791338-f3aa4680-aa8f-11eb-9339-8f35ed5de2e1.png) 
+
+![image](https://user-images.githubusercontent.com/60964439/116791338-f3aa4680-aa8f-11eb-9339-8f35ed5de2e1.png)
+
 ### Registration
+
 ![image](https://user-images.githubusercontent.com/60964439/116791531-75e73a80-aa91-11eb-8ec9-cc08c454ad7a.png)
 
-
 ### Running
+
 To run this app
 
 * Install dependencies: `./gradlew clean build`
 * Start server: `./gradlew bootRun`
 * Open `http://localhost:8080` in your browser 🎉
-  
 
 ### Reference Documentation
+
 For further reference, please consider the following sections:
 
 * [Official Gradle documentation](https://docs.gradle.org)
@@ -25,6 +28,7 @@ For further reference, please consider the following sections:
 * [Thymeleaf](https://www.thymeleaf.org/documentation.html)
 
 ### Guides
+
 The following guides illustrate how to use some features concretely:
 
 * [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
@@ -33,6 +37,7 @@ The following guides illustrate how to use some features concretely:
 * [Tutorial: Thymeleaf + Spring](https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html)
 
 ### Additional Links
+
 These additional references should also help you:
 
 * [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
