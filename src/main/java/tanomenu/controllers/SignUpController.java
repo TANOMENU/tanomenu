@@ -28,7 +28,6 @@ public class SignUpController {
     public String signUp(Model model) {
         model.addAttribute("user", new User());
         return "sign-up";
-
     }
 
     @PostMapping("/sign-up")

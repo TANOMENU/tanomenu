@@ -18,27 +18,32 @@ public class UserController {
     }
 
     @PostMapping
-    public Optional<User> setUser(@RequestBody User user) {
-        return userRepository.find(user.getUuid());
+    public String setUser(@RequestBody User user) {
+        userRepository.save(user);
+        return "redirect:/login";
     }
 
     @PutMapping("/{uuid}")
-    public User updateUser(Model model, @Valid @PathVariable UUID uuid, @RequestBody User user) {
-        return userRepository.update(uuid, user);
+    public String updateUser(Model model, @Valid @PathVariable UUID uuid, @RequestBody User user) {
+        model.addAttribute("user", userRepository.update(uuid, user));
+        return "users/{uuid}";
     }
 
-    @GetMapping
+    // TODO Tem necessidade?
+    /*@GetMapping
     public List<User> getAllUsers()  {
         return userRepository.findAll();
-    }
+    }*/
 
     @GetMapping("/{uuid}")
-    public Optional<User> getUser(@PathVariable UUID uuid) {
-        return userRepository.find(uuid);
+    public String getUser(@PathVariable UUID uuid, Model model) {
+        model.addAttribute("user", userRepository.find(uuid));
+        return "/users/{uuid}";
     }
 
     @DeleteMapping("/{uuid}")
-    public void deleteUser(@PathVariable UUID uuid) {
+    public String deleteUser(@PathVariable UUID uuid) {
         userRepository.delete(uuid);
+        return "redirect:/index";
     }
 }
