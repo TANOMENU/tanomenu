@@ -2,9 +2,8 @@ package tanomenu.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import tanomenu.repository.ProductRepository;
 import tanomenu.models.Product;
+import tanomenu.repository.ProductRepository;
 
 import javax.validation.Valid;
 import java.util.List;

@@ -2,7 +2,6 @@ package tanomenu.repository;
 
 import org.springframework.stereotype.Component;
 import tanomenu.models.Restaurant;
-import tanomenu.models.User;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -45,7 +44,6 @@ public class RestaurantRepository {
                 .map(r -> r.toBuilder().build())
                 .collect(Collectors.toList());
     }
-
 
 
 }

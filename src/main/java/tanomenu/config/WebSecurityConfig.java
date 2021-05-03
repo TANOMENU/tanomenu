@@ -7,13 +7,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import tanomenu.repository.UserRepository;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AuthUserDetailsService authUserService;
-
+    private UserRepository userRepository;
     private final PasswordEncoder bCryptPasswordEncoder;
 
     public WebSecurityConfig(AuthUserDetailsService authUserService, PasswordEncoder bcryptPasswordEncoder) {
@@ -24,23 +25,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/css/**", "/img/**", "/login", "/sign-up").permitAll()
                 .anyRequest().authenticated()
-            .and()
+                .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/home")
+                .defaultSuccessUrl("/")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .failureUrl("/login?error=true")
                 .permitAll()
-            .and()
+                .and()
                 .logout()
                 .logoutSuccessUrl("/login?logout=true")
                 .invalidateHttpSession(true)
                 .permitAll()
-            .and()
+                .and()
                 .csrf()
                 .disable();
     }

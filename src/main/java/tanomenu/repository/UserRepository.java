@@ -18,7 +18,6 @@ public class UserRepository {
                 .findFirst();
     }
 
-
     // TODO verificar com o grupo se o save do user poderá já incluir um restaurante
     public User save(User user) {
         var u = user.withUuid(UUID.randomUUID());
@@ -31,7 +30,7 @@ public class UserRepository {
         var result = users.stream()
                 .filter(u -> u.getUuid().equals(uuid))
                 .findFirst();
-        System.out.println(uuid+ " " +user);
+        System.out.println(uuid + " " + user);
         return result.map(u -> {
             u.update(user);
             return u.toBuilder().build();

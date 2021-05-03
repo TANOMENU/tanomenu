@@ -2,7 +2,6 @@ package tanomenu.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import tanomenu.models.Restaurant;
 import tanomenu.repository.RestaurantRepository;
 

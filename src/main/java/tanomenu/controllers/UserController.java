@@ -1,16 +1,14 @@
 package tanomenu.controllers;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import tanomenu.models.User;
 import tanomenu.repository.UserRepository;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.UUID;
 
 @RestController
-// TODO Verificar com o grupo como serão as urls do projeto
 @RequestMapping("/users")
 public class UserController {
 
@@ -21,30 +19,35 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<?> setUser(@RequestBody User user) {
-        return ResponseEntity.ok(userRepository.save(user));
+    public String setUser(@RequestBody User user) {
+        userRepository.save(user);
+        return "redirect:/login";
     }
 
-    // TODO Verificar com o grupo melhores maneiras de validar se o uuid digitado na URL é válido
-    @PostMapping("/{uuid}")
-    public ResponseEntity<?> updateUser(@Valid @PathVariable UUID uuid, @RequestBody User user) {
-        return ResponseEntity.ok(userRepository.update(uuid, user));
+    @PutMapping("/{uuid}")
+    public String updateUser(Model model, @Valid @PathVariable UUID uuid, @RequestBody User user) {
+        model.addAttribute("user", userRepository.update(uuid, user));
+        return "users/" + uuid;
     }
 
-    @GetMapping
-    public ResponseEntity<List<User>> getAllUsers()  {
-        return ResponseEntity.ok(userRepository.findAll());
-    }
+    // TODO Tem necessidade?
+    /*@GetMapping
+    public List<User> getAllUsers()  {
+        return userRepository.findAll();
+    }*/
 
     @GetMapping("/{uuid}")
-    public ResponseEntity<User> getUser(@PathVariable UUID uuid) {
-        return ResponseEntity.of(userRepository.find(uuid));
+    public String getUser(@PathVariable UUID uuid) {
+        var u = userRepository.find(uuid);
+        if (u.isPresent())
+            return "/users/" + uuid;
+
+        return "redirect:/login";
     }
 
-
-
     @DeleteMapping("/{uuid}")
-    public void deleteUser(@PathVariable UUID uuid) {
+    public String deleteUser(@PathVariable UUID uuid) {
         userRepository.delete(uuid);
+        return "redirect:/login";
     }
 }
