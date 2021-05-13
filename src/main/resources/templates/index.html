@@ -1,0 +1,83 @@
+<!doctype html>
+
+// Esse código foi tirado de exemplo do link: https://spring.io/guides/tutorials/spring-boot-oauth2/#github-register-application
+// Não entendi o motivo dos scripts não estarem funcionando
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Demo</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script type="javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+</head>
+
+<body>
+<h1>TANOMENU</h1>
+
+<div class="container unauthenticated">
+    With GitHub: <a href="/oauth2/authorization/github">click here</a>
+</div>
+<div class="container authenticated" style="display:none">
+    Logged in as: <span id="user"></span>
+    <div>
+        <button onClick="logout()" class="btn btn-primary">Logout</button>
+    </div>
+</div>
+
+<p>Já possui uma conta? <a href="http://localhost:8080/login">Login</a></p>
+
+<script type="text/javascript">
+            $.get("/user", function(data) {
+                $("#user").html(data.name);
+                $(".unauthenticated").hide()
+                $(".authenticated").show()
+            });
+
+</script>
+
+<script>
+            var logout = function() {
+                $.post("/logout", function() {
+                $("#user").html('');
+                $(".unauthenticated").show();
+                $(".authenticated").hide();
+            })
+            return true;
+            }
+
+</script>
+
+<script>
+            $.ajaxSetup({
+                beforeSend : function(xhr, settings) {
+            if (settings.type == 'POST' || settings.type == 'PUT'
+                || settings.type == 'DELETE') {
+            if (!(/^http:.*/.test(settings.url) || /^https:.*/
+                .test(settings.url))) {
+                // Only send the token to relative URLs i.e. locally.
+                xhr.setRequestHeader("X-XSRF-TOKEN",
+                Cookies.get('XSRF-TOKEN'));
+                    }
+                }
+            }
+        });
+
+</script>
+
+</body>
+
+</html>

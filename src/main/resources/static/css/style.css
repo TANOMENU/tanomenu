@@ -52,6 +52,16 @@
     margin: 10px 0;
 }
 
+.link {
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
 .signup {
     display: flex;
     flex-direction: column;
@@ -67,9 +77,14 @@
 
 .signup header img {
     width: 250px;
+    margin-top: 30px;
+    margin-left: 50%;
+    transform: translate(-50%, -50%)
 }
 
 .signup main {
+    display: flex;
+    flex-direction: column;
     align-self: center;
     justify-self: center;
     margin: 20px 40px;

@@ -1,14 +1,12 @@
 package tanomenu.controllers;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import tanomenu.models.User;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import tanomenu.models.User;
 import tanomenu.repository.UserRepository;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -21,22 +19,35 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<?> setUser(@Valid @RequestBody User user) {
-        return ResponseEntity.ok(userRepository.save(user));
+    public String setUser(@RequestBody User user) {
+        userRepository.save(user);
+        return "redirect:/login";
     }
 
-    @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(userRepository.findAll());
+    @PutMapping("/{uuid}")
+    public String updateUser(Model model, @Valid @PathVariable UUID uuid, @RequestBody User user) {
+        model.addAttribute("user", userRepository.update(uuid, user));
+        return "users/" + uuid;
     }
+
+    // TODO Tem necessidade?
+    /*@GetMapping
+    public List<User> getAllUsers()  {
+        return userRepository.findAll();
+    }*/
 
     @GetMapping("/{uuid}")
-    public ResponseEntity<User> getUser(@PathVariable UUID uuid) {
-        return ResponseEntity.of(userRepository.find(uuid));
+    public String getUser(@PathVariable UUID uuid) {
+        var u = userRepository.find(uuid);
+        if (u.isPresent())
+            return "/users/" + uuid;
+
+        return "redirect:/login";
     }
 
     @DeleteMapping("/{uuid}")
-    public void deleteUser(@PathVariable UUID uuid) {
+    public String deleteUser(@PathVariable UUID uuid) {
         userRepository.delete(uuid);
+        return "redirect:/login";
     }
 }
