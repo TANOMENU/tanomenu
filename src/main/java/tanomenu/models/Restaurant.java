@@ -16,7 +16,7 @@ public class Restaurant implements Model<Restaurant> {
     private UUID uuid;
 
     @NotNull
-    private User user;
+    private UUID userUuid;
 
     @NotBlank
     private String nameRestaurant;

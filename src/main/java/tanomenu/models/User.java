@@ -25,9 +25,6 @@ public class User implements Model<User> {
     @NotBlank
     private String password;
 
-    // TODO aqui poderia ser uma lista de restaurantes
-    private Restaurant restaurant;
-
     @SneakyThrows
     @Override
     public User clone() {

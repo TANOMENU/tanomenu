@@ -14,6 +14,8 @@ public class Product implements Model<Product> {
 
     private UUID uuid;
 
+    private UUID restaurantUuid;
+
     @NotBlank
     private String name;
 

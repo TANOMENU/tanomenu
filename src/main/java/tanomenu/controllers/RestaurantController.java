@@ -1,6 +1,7 @@
 package tanomenu.controllers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tanomenu.models.Restaurant;
 import tanomenu.repository.RestaurantRepository;
@@ -11,7 +12,7 @@ import java.util.stream.Stream;
 
 @RestController
 // TODO Verificar com o grupo as urls do projeto
-@RequestMapping("users/{uuid}/restaurant")
+@RequestMapping("restaurant/")
 public class RestaurantController {
 
     private RestaurantRepository restaurantRepository;
@@ -21,23 +22,27 @@ public class RestaurantController {
     }
 
     @PostMapping
-    public ResponseEntity<Restaurant> setRestaurant(@RequestBody Restaurant restaurant) {
-        return ResponseEntity.ok(restaurantRepository.save(restaurant));
+    public String setRestaurant(Model model, @RequestBody Restaurant restaurant) {
+        model.addAttribute("restaurant", restaurantRepository.save(restaurant));
+        return "redirect:login/";
     }
 
     @DeleteMapping("{uuid}")
-    public void deleteRestaurant(@PathVariable UUID uuid) {
+    public String deleteRestaurant(@PathVariable UUID uuid) {
         restaurantRepository.delete(uuid);
+        return "home/";
     }
 
     @GetMapping("{uuid}")
-    public ResponseEntity<Restaurant> getRestaurant(@Valid @PathVariable UUID uuid) {
-        return ResponseEntity.of(restaurantRepository.find(uuid));
+    public String getRestaurant(Model model, @Valid @PathVariable UUID uuid) {
+        model.addAttribute("restaurant", restaurantRepository.find(uuid));
+        return "redirect:restaurant/"+uuid+"/";
     }
 
     @GetMapping
-    public ResponseEntity<Stream<Restaurant>> getAllRestaurant(@Valid @PathVariable UUID uuid) {
+    public String getAllRestaurant(Model model, @Valid @PathVariable UUID uuid) {
         var r = restaurantRepository.findAll();
-        return ResponseEntity.ok(r.stream().filter(restaurant -> restaurant.getUser().getUuid().equals(uuid)));
+        model.addAttribute(r.stream().filter(restaurant -> restaurant.getUuid().equals(uuid)));
+        return "restaurant/"+uuid;
     }
 }
