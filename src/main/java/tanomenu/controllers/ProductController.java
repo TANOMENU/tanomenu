@@ -7,6 +7,7 @@ import tanomenu.repository.ProductRepository;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("users/{uuid}/restaurant/{uuid}")
@@ -29,12 +30,12 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable Long id) {
-        return ResponseEntity.of(productRepository.findId(id));
+    public ResponseEntity<Product> getProduct(@PathVariable UUID id) {
+        return ResponseEntity.of(productRepository.find(id));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProduct(Long id) {
+    public void deleteProduct(UUID id) {
         productRepository.delete(id);
     }
 

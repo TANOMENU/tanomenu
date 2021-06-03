@@ -9,9 +9,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-public class User {
+public class User implements Model<User> {
 
-    @With
     private UUID uuid;
 
     @NotBlank(message = "Não pode estar em branco")
@@ -29,7 +28,14 @@ public class User {
     // TODO aqui poderia ser uma lista de restaurantes
     private Restaurant restaurant;
 
+    @SneakyThrows
+    @Override
+    public User clone() {
+        return (User) super.clone();
+    }
+
     public void update(User user) {
+        user = (User) user;
         this.name = user.getName();
         this.email = user.getEmail();
         this.password = user.getPassword();
