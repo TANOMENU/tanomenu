@@ -25,7 +25,7 @@
                 <div style="height: 15rem; width: 15rem">
                     <img class="w-100 h-100 rounded-circle" src="https://brenoxavier.dev/images/profile.jpeg" style="object-fit: cover" />
                 </div>
-                <h1>Breno Xavier</h1>
+                <h1 th:text="${user.getName()}">></h1>
             </div>
 <!--            <div class="d-flex flex-column justify-content-center align-items-center mt-5">-->
 <!--                <div class="d-flex align-items-center justify-content-between w-50 btn">-->
@@ -86,82 +86,59 @@
         <div class="modal fade" id="profile-modal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Editar Perfil</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <label for="name">Nome</label>
-                            <input id="name" class="form-control" />
+                    <form th:action="@{/profile}" th:object="${user}" method="post">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Editar Perfil</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="mt-2">
-                            <label for="cpf">CPF</label>
-                            <input id="cpf" class="form-control" />
+                        <div class="modal-body">
+                            <div>
+                                <label for="name">Nome</label>
+                                <input th:value="${user.getName()}" th:field="*{name}" id="name" class="form-control" />
+                            </div>
+                            <div class="mt-2">
+                                <label for="cpf">CPF</label>
+                                <input th:value="${user.getCpf()}" th:field="*{cpf}" id="cpf" class="form-control" />
+                            </div>
+                            <div class="mt-2">
+                                <label for="profile-photo">Foto de Perfil</label>
+                                <input class="form-control" type="file" id="profile-photo">
+                            </div>
                         </div>
-                        <div class="mt-2">
-                            <label for="profile-photo">Foto de Perfil</label>
-                            <input class="form-control" type="file" id="profile-photo">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button id="profile-submit" type="submit" class="btn btn-primary">Confirmar</button>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        <button id="profile-submit" type="button" class="btn btn-primary">Confirmar</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
         <div class="modal fade" id="security-modal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content" action="/login" method="post">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Editar Informações de Segurança</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <label for="email">Email</label>
-                            <input name="email" id="email" class="form-control" />
+                <div class="modal-content">
+                    <form th:action="@{/profile/security}" th:object="${user}" method="post">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Editar Informações de Segurança</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="mt-2">
-                            <label for="password">Senha</label>
-                            <input type="password" name="password" id="password" class="form-control" />
+                        <div class="modal-body">
+                            <div>
+                                <label for="email">Email</label>
+                                <input th:value="${user.getEmail()}" th:field="*{email}" type="email" id="email" class="form-control" />
+                            </div>
+                            <div class="mt-2">
+                                <label for="password">Senha</label>
+                                <input th:field="*{password}" type="password" id="password" class="form-control" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        <button id="security-submit" type="button" class="btn btn-primary">Confirmar</button>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" id="security-submit" class="btn btn-primary">Confirmar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script>
-
-            const nameField = document.querySelector('#name')
-            const cpfField = document.querySelector('#cpf')
-            const emailField = document.querySelector('#email')
-            const passwordField = document.querySelector('#password')
-
-            document.querySelector('#profile-submit').onclick = () => {
-                const data = {
-                    name: nameField.value,
-                    cpf: cpfField.value
-                }
-
-                axios.put('/profile', data)
-            }
-
-            document.querySelector('#security-submit').onclick = () => {
-                const data = {
-                    email: emailField.value,
-                    password: passwordField.value
-                }
-
-                axios.put('/security', data)
-            }
-
-        </script>
     </body>
 </html>
