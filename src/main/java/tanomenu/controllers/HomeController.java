@@ -1,9 +1,11 @@
 package tanomenu.controllers;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import tanomenu.config.AuthUserDetails;
 import tanomenu.repository.UserRepository;
 
 import java.util.Map;
@@ -19,8 +21,11 @@ public class HomeController {
     }
 
     @GetMapping
-    public ModelAndView index() {
-        return new ModelAndView("index", Map.of("users", userRepository.findAll()));
+    public ModelAndView index(@AuthenticationPrincipal AuthUserDetails userDetails) {
+        return new ModelAndView("index", Map.of(
+                "currentUser", userRepository.find(userDetails.getUUID()).get(),
+                "allUsers", userRepository.findAll())
+        );
     }
 
 }

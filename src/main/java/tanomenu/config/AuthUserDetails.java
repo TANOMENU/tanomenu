@@ -6,6 +6,7 @@ import tanomenu.models.User;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 public class AuthUserDetails implements UserDetails {
 
@@ -13,6 +14,10 @@ public class AuthUserDetails implements UserDetails {
 
     public AuthUserDetails(User user) {
         this.user = user;
+    }
+
+    public UUID getUUID() {
+        return user.getUuid();
     }
 
     @Override

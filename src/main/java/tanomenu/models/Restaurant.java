@@ -11,9 +11,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-public class Restaurant {
+public class Restaurant implements Model<Restaurant> {
 
-    @With
     private UUID uuid;
 
     @NotNull
@@ -27,8 +26,15 @@ public class Restaurant {
 
     private List<Product> products;
 
+    @Override
     public void update(Restaurant restaurant) {
         this.nameRestaurant = restaurant.getNameRestaurant();
         this.cnpj = restaurant.getCnpj();
+    }
+
+    @SneakyThrows
+    @Override
+    public Restaurant clone() {
+        return (Restaurant) super.clone();
     }
 }
