@@ -17,7 +17,7 @@
     margin: 5px 0;
 }
 
-.field input {
+.field input, .field select {
     background: #FFFFFF;
     border: none;
     border-radius: 10px;

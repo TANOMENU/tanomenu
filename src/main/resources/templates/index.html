@@ -8,52 +8,23 @@
 <header th:replace="base :: header"></header>
 
 <main>
-    <h2>Olá, <!--/*@thymesVar id="currentUser" type="tanomenu.models.User"*/-->
-        <span th:text="${currentUser.getName()}"></span>
-    </h2>
-
+    <!--/*@thymesVar id="currentUser" type="tanomenu.models.User"*/-->
+    <h2>Olá, <span th:text="${currentUser.getName()}"></span></h2>
     <a href="/logout">Sair</a>
 
     <br><br><br>
 
     <h2>Todos os usuários</h2>
-    <table>
-        <tr>
-            <th>UUID</th>
-            <th>Nome</th>
-            <th>Email</th>
-        </tr>
-        <!--/*@thymesVar id="allUsers" type="List"*/-->
-        <tr th:each="user: ${allUsers}">
-            <!--/*@thymesVar id="user" type="tanomenu.models.User"*/-->
-            <td th:text="${user.getUuid()}" />
-            <td th:text="${user.getName()}" />
-            <td th:text="${user.getEmail()}" />
-        </tr>
-    </table>
-
-
-    <br><br><br>
+    <ul style="margin: 30px;">
+        <!--/*@thymesVar id="allRestaurants" type="List"*/-->
+        <li th:each="user: ${allUsers}" th:text="${user}"></li>
+    </ul>
 
     <h2>Todos os restaurantes</h2>
-    <table>
-        <tr>
-            <th>UUID</th>
-            <th>Nome</th>
-            <th>CNPJ</th>
-        </tr>
+    <ul style="margin: 30px;">
         <!--/*@thymesVar id="allRestaurants" type="List"*/-->
-        <tr th:each="restaurant: ${allRestaurants}">
-            <!--/*@thymesVar id="restaurant" type="tanomenu.models.Restaurant"*/-->
-            <td th:text="${restaurant.getUuid()}" />
-            <td th:text="${restaurant.getName()}" />
-            <td th:text="${restaurant.getCnpj()}" />
-        </tr>
-    </table>
-
-
-
-    <br><br><br>
+        <li th:each="restaurant: ${allRestaurants}" th:text="${restaurant}"></li>
+    </ul>
 </main>
 
 <footer th:replace="base :: footer"></footer>

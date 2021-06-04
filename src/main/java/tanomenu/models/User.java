@@ -25,9 +25,6 @@ public class User implements Model<User> {
     @NotBlank
     private String password;
 
-    // TODO aqui poderia ser uma lista de restaurantes
-    private Restaurant restaurant;
-
     @SneakyThrows
     @Override
     public User clone() {
@@ -35,7 +32,6 @@ public class User implements Model<User> {
     }
 
     public void update(User user) {
-        user = (User) user;
         this.name = user.getName();
         this.email = user.getEmail();
         this.password = user.getPassword();
