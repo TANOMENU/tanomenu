@@ -37,20 +37,20 @@ public class RestaurantController {
         }).orElse("redirect:/");
     }
 
-    @GetMapping("/create")
-    public String create(Model model){
+    @GetMapping("/register")
+    public String register(Model model){
         model.addAttribute("restaurant", new Restaurant());
-        return "restaurant/create";
+        return "restaurant/register";
     }
 
-    @PostMapping("/create")
-    public String create(@ModelAttribute Restaurant restaurant, BindingResult bindingResult, @AuthenticationPrincipal AuthUserDetails userDetails) {
+    @PostMapping("/register")
+    public String register(@ModelAttribute Restaurant restaurant, BindingResult bindingResult, @AuthenticationPrincipal AuthUserDetails userDetails) {
         restaurantRepository.findByCnpj(restaurant.getCnpj())
                 .ifPresent(u -> bindingResult.rejectValue("cnpj",
                         "already.exists", "CNPJ já cadastrado"));
 
         if (bindingResult.hasErrors())
-            return "/restaurant/create";
+            return "/restaurant/register";
 
         restaurant.setUserUuid(userDetails.getUUID());
         restaurant = restaurantRepository.save(restaurant);

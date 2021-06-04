@@ -11,7 +11,7 @@
     <main class="login-signup">
         <h1 class="page-title">Cadastrar Restaurante</h1>
 
-        <form method="post" th:action="@{/restaurant/create}" th:object="${restaurant}">
+        <form method="post" th:action="@{/restaurant/register}" th:object="${restaurant}">
             <label class="field">
                 Nome do Restaurante
                 <input type="text" th:field="*{name}"/>
