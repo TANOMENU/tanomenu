@@ -8,26 +8,65 @@
     <header th:replace="base :: header">
     </header>
 
-    <main class="login-signup">
+    <main class="register-restaurant">
         <h1 class="page-title">Cadastrar Restaurante</h1>
 
         <form method="post" th:action="@{/restaurant/register}" th:object="${restaurant}">
-            <label class="field">
-                Nome do Restaurante
-                <input type="text" th:field="*{name}"/>
-                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-            </label>
-            <label class="field">
-                CNPJ
-                <input type="text" th:field="*{cnpj}"/>
-                <span th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}"></span>
-            </label>
-            <label class="field">
-                Telefone
-                <input type="text" th:field="*{phone}"/>
-                <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
-            </label>
-            <button type="submit" class="button">Começar</button>
+            <div class="fieldsets-container">
+                <fieldset>
+                    <label class="field">
+                        Nome Fantasia
+                        <input type="text" th:field="*{tradeName}"/>
+                        <span th:if="${#fields.hasErrors('tradeName')}" th:errors="*{tradeName}"></span>
+                    </label>
+                    <label class="field">
+                        Razão social
+                        <input type="text" th:field="*{companyName}"/>
+                        <span th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}"></span>
+                    </label>
+                    <label class="field">
+                        CNPJ
+                        <input type="text" th:field="*{cnpj}"/>
+                        <span th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}"></span>
+                    </label>
+                    <label class="field">
+                        Telefone
+                        <input type="text" th:field="*{phone}"/>
+                        <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <label class="field">
+                        Logradouro
+                        <input type="text" th:field="*{address.area}"/>
+                        <span th:if="${#fields.hasErrors('address.area')}" th:errors="*{address.area}"></span>
+                    </label>
+                    <label class="field">
+                        CEP
+                        <input type="text" th:field="*{address.postalCode}"/>
+                        <span th:if="${#fields.hasErrors('address.postalCode')}" th:errors="*{address.postalCode}"></span>
+                    </label>
+                    <label class="field">
+                        Bairro
+                        <input type="text" th:field="*{address.neighborhood}"/>
+                        <span th:if="${#fields.hasErrors('address.neighborhood')}" th:errors="*{address.neighborhood}"></span>
+                    </label>
+                    <label class="field">
+                        Cidade
+                        <input type="text" th:field="*{address.city}"/>
+                        <span th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"></span>
+                    </label>
+                    <label class="field">
+                        Estado
+                        <select th:field="*{address.state}">
+                            <option th:each="stateOpt : ${T(tanomenu.models.restaurant.State).values()}"
+                                    th:value="${stateOpt}" th:text="${stateOpt.getName()}"></option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('address.state')}" th:errors="*{address.state}"></span>
+                    </label>
+                </fieldset>
+            </div>
+            <button type="submit" class="button submit">Continuar</button>
         </form>
     </main>
 </body>
