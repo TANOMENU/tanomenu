@@ -1,43 +1,60 @@
 package tanomenu.controllers;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import tanomenu.config.AuthUserDetails;
 import tanomenu.models.Restaurant;
 import tanomenu.repository.RestaurantRepository;
 
-import javax.validation.Valid;
+import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Stream;
 
-@RestController
-// TODO Verificar com o grupo as urls do projeto
-@RequestMapping("users/{uuid}/restaurant")
+@Controller
+@RequestMapping("restaurant")
 public class RestaurantController {
 
-    private RestaurantRepository restaurantRepository;
+    private final RestaurantRepository restaurantRepository;
 
     public RestaurantController(RestaurantRepository restaurantRepository) {
         this.restaurantRepository = restaurantRepository;
     }
 
-    @PostMapping
-    public ResponseEntity<Restaurant> setRestaurant(@RequestBody Restaurant restaurant) {
-        return ResponseEntity.ok(restaurantRepository.save(restaurant));
+    @GetMapping("/{uuid}")
+    public String show(@PathVariable String uuid, Model model) {
+        Optional<Restaurant> restaurant;
+        try {
+            restaurant = restaurantRepository.find(UUID.fromString(uuid));
+        } catch (IllegalArgumentException e) {
+            restaurant = Optional.empty();
+        }
+
+        return restaurant.map(r -> {
+            model.addAttribute("restaurant", r);
+            return "/restaurant/index";
+        }).orElse("redirect:/");
     }
 
-    @DeleteMapping("{uuid}")
-    public void deleteRestaurant(@PathVariable UUID uuid) {
-        restaurantRepository.delete(uuid);
+    @GetMapping("/register")
+    public String register(Model model){
+        model.addAttribute("restaurant", new Restaurant());
+        return "restaurant/register";
     }
 
-    @GetMapping("{uuid}")
-    public ResponseEntity<Restaurant> getRestaurant(@Valid @PathVariable UUID uuid) {
-        return ResponseEntity.of(restaurantRepository.find(uuid));
-    }
+    @PostMapping("/register")
+    public String register(@ModelAttribute Restaurant restaurant, BindingResult bindingResult, @AuthenticationPrincipal AuthUserDetails userDetails) {
+        restaurantRepository.findByCnpj(restaurant.getCnpj())
+                .ifPresent(u -> bindingResult.rejectValue("cnpj",
+                        "already.exists", "CNPJ já cadastrado"));
 
-    @GetMapping
-    public ResponseEntity<Stream<Restaurant>> getAllRestaurant(@Valid @PathVariable UUID uuid) {
-        var r = restaurantRepository.findAll();
-        return ResponseEntity.ok(r.stream().filter(restaurant -> restaurant.getUser().getUuid().equals(uuid)));
+        if (bindingResult.hasErrors())
+            return "/restaurant/register";
+
+        restaurant.setUserUuid(userDetails.getUUID());
+        restaurant = restaurantRepository.save(restaurant);
+
+        return "redirect:/restaurant/" + restaurant.getUuid();
     }
 }
