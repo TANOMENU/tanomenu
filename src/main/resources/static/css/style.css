@@ -1,3 +1,108 @@
-@import url(base.css);
-@import url(login-signup.css);
-@import url(restaurant-register.css);
+/*
+
+    IMPORTANTE!!!!!!!!
+
+    COMBINAR UM SISTEMA DE ESCRITA DE CSS ANTES QUE ISSO AQUI CRESCA DEMAIS
+    EXEMPLOS https://tableless.com.br/oocss-smacss-bem-dry-css-afinal-como-escrever-css/
+
+ */
+
+@import url(restaurant/profile.css);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+}
+
+.field {
+    display: grid;
+    grid-auto-rows: auto;
+    font-size: 17px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.field input {
+    background: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px #CCC;
+    font-size: 20px;
+    font-weight: normal;
+    padding: 10px 20px;
+    margin-top: 5px;
+}
+
+.field span {
+    color: red;
+    text-align: center;
+    font-weight: normal;
+}
+
+.button {
+    border: none;
+    border-radius: 10px;
+    background: #f8ac38;
+    font-size: 20px;
+    padding: 10px 20px;
+    color: #FFFFFF;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.signup {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: url("/img/background.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.signup header {
+    padding: 10px 20px;
+}
+
+.signup header img {
+    width: 250px;
+    margin-top: 30px;
+    margin-left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.signup main {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-self: center;
+    margin: 20px 40px;
+    width: 350px;
+}
+
+.signup main h2 {
+    text-align: center;
+}
+
+.signup main form {
+    display: grid;
+    grid-auto-rows: auto;
+}
+
+.signup footer {
+    padding: 10px 20px;
+    text-align: center;
+}
+
