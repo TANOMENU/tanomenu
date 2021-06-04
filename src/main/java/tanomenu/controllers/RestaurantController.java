@@ -1,16 +1,17 @@
 package tanomenu.controllers;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import tanomenu.config.AuthUserDetails;
 import tanomenu.models.Restaurant;
 import tanomenu.repository.RestaurantRepository;
 
 import javax.validation.Valid;
 import java.util.UUID;
-import java.util.stream.Stream;
 
-@RestController
+@Controller
 // TODO Verificar com o grupo as urls do projeto
 @RequestMapping("restaurant/")
 public class RestaurantController {
@@ -22,9 +23,10 @@ public class RestaurantController {
     }
 
     @PostMapping
-    public String setRestaurant(Model model, @RequestBody Restaurant restaurant) {
-        model.addAttribute("restaurant", restaurantRepository.save(restaurant));
-        return "redirect:login/";
+    public String setRestaurant(Model model, @ModelAttribute Restaurant restaurant, @AuthenticationPrincipal AuthUserDetails userDetails) {
+        var r = restaurantRepository.save(restaurant);
+        model.addAttribute("restaurant", r);
+        return "redirect:profile/" + r.getUuid();
     }
 
     @DeleteMapping("{uuid}")
@@ -40,9 +42,15 @@ public class RestaurantController {
     }
 
     @GetMapping
-    public String getAllRestaurant(Model model, @Valid @PathVariable UUID uuid) {
+    public String getAllRestaurant(Model model, @AuthenticationPrincipal AuthUserDetails userDetails) {
         var r = restaurantRepository.findAll();
-        model.addAttribute(r.stream().filter(restaurant -> restaurant.getUuid().equals(uuid)));
-        return "restaurant/"+uuid;
+        model.addAttribute(r.stream().filter(restaurant -> restaurant.getUserUuid().equals(userDetails.getUUID())));
+        return "restaurant/" + userDetails.getUUID();
+    }
+
+    @GetMapping("create")
+    public String Create(Model model) {
+        model.addAttribute("restaurant", new Restaurant());
+        return "Restaurant/save-restaurant";
     }
 }

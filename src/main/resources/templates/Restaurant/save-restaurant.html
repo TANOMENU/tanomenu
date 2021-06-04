@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <form th:action="@{/restaurant/}" th:object="${restaurant}" method="post">
+    <p>Nome</p>
+    <input type="text" th:field="*{nameRestaurant}"/>
+    <p>cnpj</p>
+    <input type="text" th:field="*{cnpj}">
+
+    <button type="submit" class="button">Continuar</button>
+  </form>
+</body>
+</html>

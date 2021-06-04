@@ -10,7 +10,7 @@ import tanomenu.repository.RestaurantRepository;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/Restaurant")
+@RequestMapping("restaurant/profile")
 public class RestaurantProfileController {
 
     private final RestaurantRepository restaurantRepository;
@@ -23,8 +23,8 @@ public class RestaurantProfileController {
     public String RestaurantProfile(Model model, @PathVariable UUID uuid) {
         var restaurant = restaurantRepository.find(uuid);
         if(restaurant.isPresent()) {
-            model.addAttribute("restaurant", restaurant);
-            return "/Restaurant/profile";
+            model.addAttribute("restaurant", restaurant.get());
+            return "Restaurant/profile";
         }
         return "redirect:/index";
     }

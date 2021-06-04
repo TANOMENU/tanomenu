@@ -1,32 +1,46 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-    <head>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+    <head th:replace="base :: head(~{::title})">
+
         <meta charset="UTF-8">
         <title>Perfil do Restaurant</title>
-        <link href="/css/restaurant/profile.css" rel="stylesheet">
     </head>
 
     <body>
-        <h1>Name Of Restaurant</h1>
-
-        <div class="form">
-            <div>
-                <img src="#">
-                <h4>Notificações</h4>
-                <p>Altere as opções de notificação</p>
+        <div class="main-container" >
+            <div class="image-profile">
+                <img id="img-profile" src="/img/billie.png">
+                <a href="#"><img class="icon" src="/img/icons/Pencil.svg"> </a>
             </div>
 
-            <div>
-                <img src="#">
-                <h4>Localização</h4>
-                <p>Altere a localização de seu restaurante</p>
+            <div class="name-profile">
+                <h1 th:text="${restaurant.getNameRestaurant()}">Name of restaurant</h1>
+                <a href="#"><img class="icon" src="/img/icons/Pencil.svg"></a>
             </div>
+            <form>
+                <a href="#">
+                    <img src="/img/icons/bell.svg">
+                    <h3>Notificações</h3>
+                    <p>Altere as opções de notificação</p>
+                    <hr>
+                </a>
 
-            <div>
-                <img src="#">
-                <h4>Segurança</h4>
-                <p>altere as opções de segurança de sua conta</p>
-            </div>
+                <a href="#">
+                    <img src="/img/icons/map-pin.svg">
+                    <h3>Localização</h3>
+                    <p>Altere a localização de seu restaurante</p>
+                    <hr>
+                </a>
+
+                <a href="#">
+                    <img src="/img/icons/alert-circle.svg">
+                    <h3>Segurança</h3>
+                    <p>altere as opções de segurança de sua conta</p>
+                    <hr>
+                </a>
+            </form>
+
+            <header th:replace="base :: header"></header>
         </div>
     </body>
 </html>
