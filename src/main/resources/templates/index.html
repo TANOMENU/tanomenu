@@ -33,6 +33,25 @@
     </table>
 
 
+    <br><br><br>
+
+    <h2>Todos os restaurantes</h2>
+    <table>
+        <tr>
+            <th>UUID</th>
+            <th>Nome</th>
+            <th>CNPJ</th>
+        </tr>
+        <!--/*@thymesVar id="allRestaurants" type="List"*/-->
+        <tr th:each="restaurant: ${allRestaurants}">
+            <!--/*@thymesVar id="restaurant" type="tanomenu.models.Restaurant"*/-->
+            <td th:text="${restaurant.getUuid()}" />
+            <td th:text="${restaurant.getName()}" />
+            <td th:text="${restaurant.getCnpj()}" />
+        </tr>
+    </table>
+
+
 
     <br><br><br>
 </main>

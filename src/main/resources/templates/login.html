@@ -3,37 +3,36 @@
 <head th:replace="base :: head(~{::title})">
     <title>Fazer Login</title>
 </head>
+<body class="base base-background-image">
+    <header th:replace="base :: header"></header>
 
-<body class="signup">
-<header th:replace="base :: header"></header>
+    <main class="login-signup">
+        <h1 class="page-title">Fazer Login</h1>
 
-<main>
-    <h2>Fazer Login</h2>
+        <form action="#" th:action="@{/login}" th:object="${user}" method="post">
+            <h3 th:if="${param.error}" class="alert alert-error">
+                Nome de usuário e senha inválidos
+            </h3>
+            <h3 th:if="${param.logout}" class="alert alert-success">
+                Você foi desconectado
+            </h3>
 
-    <form action="#" th:action="@{/login}" th:object="${user}" method="post">
-        <h3 th:if="${param.error}" class="alert alert-error">
-            Nome de usuário e senha inválidos
-        </h3>
-        <h3 th:if="${param.logout}" class="alert alert-success">
-            Você foi desconectado
-        </h3>
+            <label class="field">
+                Email
+                <input type="email" th:field="*{email}"/>
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </label>
+            <label class="field">
+                Senha
+                <input type="password" th:field="*{password}"/>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </label>
+            <button type="submit" class="button">Entrar</button>
+        </form>
 
-        <label class="field">
-            Email
-            <input type="email" th:field="*{email}"/>
-            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-        </label>
-        <label class="field">
-            Senha
-            <input type="password" th:field="*{password}"/>
-            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-        </label>
-        <button type="submit" class="button">Entrar</button>
-    </form>
+        <a href="sign-up" class="link">Ainda não tem uma conta?</a>
+    </main>
 
-    <a href="sign-up" class="link">Ainda não tem uma conta?</a>
-</main>
-
-<footer th:replace="base :: footer"></footer>
+    <footer th:replace="base :: footer"></footer>
 </body>
 </html>

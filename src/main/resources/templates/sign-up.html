@@ -4,11 +4,11 @@
     <title>Criar uma Conta</title>
 </head>
 
-<body class="signup">
+<body class="base base-background-image">
 <header th:replace="base :: header"></header>
 
-<main>
-    <h2>Criar uma Conta</h2>
+<main class="login-signup">
+    <h1 class="page-title">Criar uma Conta</h1>
 
     <form action="#" th:action="@{/sign-up}" th:object="${user}" method="post">
         <label class="field">

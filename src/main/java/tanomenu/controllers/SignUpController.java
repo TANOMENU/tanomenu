@@ -37,7 +37,7 @@ public class SignUpController {
     public String signUp(@ModelAttribute @Valid User user, BindingResult bindingResult) {
         userRepository.findByEmail(user.getEmail())
                 .ifPresent(u -> bindingResult.rejectValue("email",
-                        "email.already.exists", "Email já cadastrado"));
+                        "already.exists", "Email já cadastrado"));
 
         if (bindingResult.hasErrors())
             return "sign-up";

@@ -1,0 +1,17 @@
+.login-signup {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-self: center;
+    margin: 20px 40px;
+    width: 350px;
+}
+
+.login-signup > .page-title {
+    text-align: center;
+}
+
+.login-signup form {
+    display: grid;
+    grid-auto-rows: auto;
+}

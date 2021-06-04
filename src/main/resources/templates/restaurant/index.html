@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head th:replace="base :: head(~{::title})">
+  <title>Página inicial</title>
+</head>
+<body>
+  <header th:replace="base :: header"></header>
+
+  <main>
+    <!--/*@thymesVar id="restaurant" type="tanomenu.models.Restaurant"*/-->
+    <h2 th:text="${restaurant.getName()}">Nome</h2>
+    <h3 th:text="${restaurant.getPhone()}">Telefone</h3>
+    <h4 th:text="${restaurant.getCnpj()}">CNPJ</h4>
+  </main>
+
+  <footer th:replace="base :: footer"></footer>
+</body>
+</html>

@@ -15,20 +15,20 @@ public class Restaurant implements Model<Restaurant> {
 
     private UUID uuid;
 
-    @NotNull
-    private User user;
+    private UUID userUuid;
 
     @NotBlank
-    private String nameRestaurant;
+    private String name;
 
     @NotNull
     private String cnpj;
 
-    private List<Product> products;
+    @NotNull
+    private String phone;
 
     @Override
     public void update(Restaurant restaurant) {
-        this.nameRestaurant = restaurant.getNameRestaurant();
+        this.name = restaurant.getName();
         this.cnpj = restaurant.getCnpj();
     }
 

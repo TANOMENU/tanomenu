@@ -1,0 +1,94 @@
+/*global*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+}
+
+
+/*components*/
+.field {
+    display: grid;
+    grid-auto-rows: auto;
+    font-size: 17px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.field input {
+    background: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px #CCC;
+    font-size: 20px;
+    font-weight: normal;
+    padding: 10px 20px;
+    margin-top: 5px;
+}
+
+.field span {
+    color: red;
+    text-align: center;
+    font-weight: normal;
+}
+
+.button {
+    border: none;
+    border-radius: 10px;
+    background: #f8ac38;
+    font-size: 20px;
+    padding: 10px 20px;
+    color: #FFFFFF;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+
+/*body*/
+body.base {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+body.base.base-background-image {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: url("/img/background.png");
+    background-position: center;
+    background-size: cover;
+}
+
+body.base.base-background-color {
+    background: #EEEEEE;
+}
+
+
+/*header*/
+body.base > header.base-header {
+    padding: 10px 20px;
+}
+
+body.base > header.base-header > a.base-logo > img {
+    width: 250px;
+}
+
+
+/* footer */
+body.base > .base-footer {
+    padding: 10px 20px;
+    text-align: center;
+}

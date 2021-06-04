@@ -13,7 +13,7 @@ import java.util.UUID;
 @RequestMapping("users/{uuid}/restaurant/{uuid}")
 public class ProductController {
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public ProductController(ProductRepository productRepository) {
         this.productRepository = productRepository;
