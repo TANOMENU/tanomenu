@@ -33,7 +33,7 @@ public class RestaurantController {
 
         return restaurant.map(r -> {
             model.addAttribute("restaurant", r);
-            return "restaurant/index";
+            return "/restaurant/index";
         }).orElse("redirect:/");
     }
 
@@ -56,11 +56,5 @@ public class RestaurantController {
         restaurant = restaurantRepository.save(restaurant);
 
         return "redirect:/restaurant/" + restaurant.getUuid();
-    }
-
-    @DeleteMapping("{uuid}")
-    public String deleteRestaurant(@PathVariable UUID uuid) {
-        restaurantRepository.delete(uuid);
-        return "index";
     }
 }
