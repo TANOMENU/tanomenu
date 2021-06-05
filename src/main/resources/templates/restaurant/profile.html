@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
     <head>
         <th:block th:replace="common :: myHead" />
+        <link href="/css/restaurant/profile.css" rel="stylesheet">
         <title>Perfil do Restaurant</title>
     </head>
     <body>
@@ -13,7 +14,8 @@
             </div>
 
             <div class="name-profile">
-                <h1 th:text="${restaurant.getNameRestaurant()}">Name of restaurant</h1>
+                <!--/*@thymesVar id="restaurant" type="tanomenu.models.Restaurant"*/-->
+                <h1 th:text="${restaurant.getTradeName()}">Name of restaurant</h1>
                 <a href="#"><img class="icon" src="/img/icons/Pencil.svg"></a>
             </div>
             <form>

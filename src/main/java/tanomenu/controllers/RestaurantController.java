@@ -22,20 +22,7 @@ public class RestaurantController {
         this.restaurantRepository = restaurantRepository;
     }
 
-    @GetMapping("/{uuid}")
-    public String show(@PathVariable String uuid, Model model) {
-        Optional<Restaurant> restaurant;
-        try {
-            restaurant = restaurantRepository.find(UUID.fromString(uuid));
-        } catch (IllegalArgumentException e) {
-            restaurant = Optional.empty();
-        }
 
-        return restaurant.map(r -> {
-            model.addAttribute("restaurant", r);
-            return "/restaurant/index";
-        }).orElse("redirect:/");
-    }
 
     @GetMapping("/register")
     public String register(Model model){
