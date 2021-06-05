@@ -42,6 +42,6 @@ public class RestaurantController {
         restaurant.setUserUuid(userDetails.getUUID());
         restaurant = restaurantRepository.save(restaurant);
 
-        return "redirect:/restaurant/" + restaurant.getUuid();
+        return "redirect:/restaurant/profile/" + restaurant.getUuid();
     }
 }
