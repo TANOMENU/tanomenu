@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+    <head>
+        <th:block th:replace="common :: myHead" />
+        <link href="/css/restaurant/profile.css" rel="stylesheet">
+        <title>Perfil do Restaurant</title>
+    </head>
+    <body>
+
+        <div class="main-container" >
+            <div class="image-profile">
+                <img id="img-profile" src="/img/billie.png">
+                <a href="#"><img class="icon" src="/img/icons/Pencil.svg"> </a>
+            </div>
+
+            <div class="name-profile">
+                <!--/*@thymesVar id="restaurant" type="tanomenu.models.Restaurant"*/-->
+                <h1 th:text="${restaurant.getTradeName()}">Name of restaurant</h1>
+                <a href="#"><img class="icon" src="/img/icons/Pencil.svg"></a>
+            </div>
+            <form>
+                <a href="#">
+                    <img src="/img/icons/bell.svg">
+                    <h3>Notificações</h3>
+                    <p>Altere as opções de notificação</p>
+                    <hr>
+                </a>
+
+                <a href="#">
+                    <img src="/img/icons/map-pin.svg">
+                    <h3>Localização</h3>
+                    <p>Altere a localização de seu restaurante</p>
+                    <hr>
+                </a>
+
+                <a href="#">
+                    <img src="/img/icons/alert-circle.svg">
+                    <h3>Segurança</h3>
+                    <p>altere as opções de segurança de sua conta</p>
+                    <hr>
+                </a>
+            </form>
+
+            <th:block th:replace="common :: myHeader" />
+        </div>
+    </body>
+</html>

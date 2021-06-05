@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
-<head th:replace="base :: head(~{::title})">
-    <title>Página inicial</title>
-</head>
+    <head>
+        <th:block th:replace="common :: myHead" />
+        <title>Página inicial</title>
+    </head>
+    <body>
+        <th:block th:replace="common :: myHeader" />
 
-<body>
-<header th:replace="base :: header"></header>
+        <main>
+            <!--/*@thymesVar id="currentUser" type="tanomenu.models.User"*/-->
+            <h2>Olá, <span th:text="${currentUser.getName()}"></span></h2>
+            <a href="/logout">Sair</a>
 
-<main>
-    <!--/*@thymesVar id="currentUser" type="tanomenu.models.User"*/-->
-    <h2>Olá, <span th:text="${currentUser.getName()}"></span></h2>
-    <a href="/logout">Sair</a>
+            <br><br><br>
 
-    <br><br><br>
+            <h2>Todos os usuários</h2>
+            <ul style="margin: 30px;">
+                <!--/*@thymesVar id="allRestaurants" type="List"*/-->
+                <li th:each="user: ${allUsers}" th:text="${user}"></li>
+            </ul>
 
-    <h2>Todos os usuários</h2>
-    <ul style="margin: 30px;">
-        <!--/*@thymesVar id="allRestaurants" type="List"*/-->
-        <li th:each="user: ${allUsers}" th:text="${user}"></li>
-    </ul>
+            <h2>Todos os restaurantes</h2>
+            <ul style="margin: 30px;">
+                <!--/*@thymesVar id="allRestaurants" type="List"*/-->
+                <li th:each="restaurant: ${allRestaurants}" th:text="${restaurant}"></li>
+            </ul>
+        </main>
 
-    <h2>Todos os restaurantes</h2>
-    <ul style="margin: 30px;">
-        <!--/*@thymesVar id="allRestaurants" type="List"*/-->
-        <li th:each="restaurant: ${allRestaurants}" th:text="${restaurant}"></li>
-    </ul>
-</main>
-
-<footer th:replace="base :: footer"></footer>
-</body>
+        <th:block th:replace="common :: myFooter" />
+    </body>
 </html>
