@@ -24,7 +24,7 @@ public class RestaurantProfileController {
         var restaurant = restaurantRepository.find(uuid);
         if(restaurant.isPresent()) {
             model.addAttribute("restaurant", restaurant.get());
-            return "Restaurant/profile";
+            return "restaurant/profile";
         }
         return "redirect:/index";
     }
