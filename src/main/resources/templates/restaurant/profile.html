@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
-    <head th:replace="base :: head(~{::title})">
-
-        <meta charset="UTF-8">
+    <head>
+        <th:block th:replace="common :: myHead" />
         <title>Perfil do Restaurant</title>
     </head>
-
     <body>
+
         <div class="main-container" >
             <div class="image-profile">
                 <img id="img-profile" src="/img/billie.png">
@@ -40,7 +39,7 @@
                 </a>
             </form>
 
-            <header th:replace="base :: header"></header>
+            <th:block th:replace="common :: myHeader" />
         </div>
     </body>
 </html>
