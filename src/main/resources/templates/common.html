@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <th:block th:fragment="myHead">
       <meta charset="utf-8" />
@@ -10,6 +10,12 @@
 
     <header th:fragment="myHeader" class="base-header" >
         <a class="base-logo" href="#"><img src="/img/logo.png" alt="TANOMENU"></a>
+
+        <div class="badge" sec:authorize="isAuthenticated()">
+            <button th:with="user=${@userRepository.find(#authentication.principal.getUUID()).get()}">
+                <th:block th:text="${user.name}" />
+            </button>
+        </div>
     </header>
 
     <footer th:fragment="myFooter" class="base-footer">

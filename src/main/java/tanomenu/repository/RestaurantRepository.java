@@ -1,11 +1,12 @@
 package tanomenu.repository;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import tanomenu.models.Restaurant;
 
 import java.util.Optional;
 
-@Component
+@Service
 public class RestaurantRepository extends Repository<Restaurant> {
 
     public Optional<Restaurant> findByCnpj(String cnpj) {
