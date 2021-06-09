@@ -1,10 +1,13 @@
 package tanomenu.models;
 
 import lombok.*;
+import tanomenu.models.restaurant.Product;
 import tanomenu.models.restaurant.Address;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Data
@@ -31,6 +34,8 @@ public class Restaurant implements Model<Restaurant> {
 
     @NotNull
     private Address address;
+
+    private Map<String, List<Product>> menu;
 
     @Override
     public void update(Restaurant restaurant) {

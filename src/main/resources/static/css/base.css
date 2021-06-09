@@ -7,6 +7,36 @@
     outline: none;
 }
 
+:root {
+    --primary-color: #F8AC38;
+    --secondary-color: #FD5555;
+    --gray-light: #EEEEEE;
+    --gray-dark: #d4d3d361;
+    --gray-darker: #535353;
+}
+
+::-webkit-scrollbar {
+    width: 11px;
+    border-radius: 1%;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #d4d3d361;
+}
+
+::-webkit-scrollbar-button {
+    background-color: #72727256;
+    border-radius: 2%;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #7272723a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #7272727e;
+}
+
 
 /*components*/
 .field {
@@ -18,7 +48,7 @@
 }
 
 .field input, .field select {
-    background: #FFFFFF;
+    background: white;
     border: none;
     border-radius: 10px;
     box-shadow: 2px 2px 2px #CCC;
@@ -29,7 +59,7 @@
 }
 
 .field span {
-    color: red;
+    color: var(--secondary-color);
     text-align: center;
     font-weight: normal;
 }
@@ -37,10 +67,10 @@
 .button {
     border: none;
     border-radius: 10px;
-    background: #f8ac38;
+    background: var(--primary-color);
     font-size: 20px;
     padding: 10px 20px;
-    color: #FFFFFF;
+    color: white;
     font-weight: bold;
     margin: 10px 0;
 }
@@ -73,17 +103,19 @@ body.base.base-background-image {
 }
 
 body.base.base-background-color {
-    background: #EEEEEE;
+    background: var(--gray-light);
 }
 
 
 /*header*/
 body.base > header.base-header {
     padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
 body.base > header.base-header > a.base-logo > img {
-    width: 250px;
+    width: 200px;
 }
 
 

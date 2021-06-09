@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+    <!--/*@thymesVar id="restaurant" type="tanomenu.models.Restaurant"*/-->
+    <!--/*@thymesVar id="gallery" type="List<tanomenu.models.restaurant.Product>"*/-->
+    <head>
+        <th:block th:replace="common :: myHead" />
+        <title th:text="${restaurant.getTradeName()}">Nome do Restaurante</title>
+        <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+        <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+        <link href="/css/restaurant/menu.css" rel="stylesheet">
+    </head>
+    <body class="base base-background-image">
+        <th:block th:replace="common :: myHeader" />
+
+        <main class="restaurant-menu-main">
+            <section class="restaurant-menu-main-top">
+                <h1 th:text="${restaurant.tradeName}">Nome do Restaurante</h1>
+
+                <div class="gallery js-flickity" data-flickity='{ "wrapAround": true, "contain": true }'>
+                    <div class="gallery-cell"
+                         th:each="product :${gallery}"
+                         th:style="'background-image: url(' + ${product.image} + ')'"
+                         th:title="${product.description}"
+                    >
+                        <h2 th:text="${product.name}"></h2>
+                        <h3 th:text="'R$ ' + ${product.price}"></h3>
+                    </div>
+                </div>
+            </section>
+
+            <section class="restaurant-menu-main-content">
+                <ul th:each="entry, stat :${restaurant.getMenu()}">
+                    <h2 th:text="${entry.key.toUpperCase()}">Seção do Menu</h2>
+                    <li th:each="product :${entry.value}">
+                        <h3><span th:text="${product.name}">Nome do produto</span> R$ <th:block th:text="${product.price}" /></h3>
+                        <p th:text="${product.description}">Descrição dos ingredientes, preparos, receita, etc.</p>
+                    </li>
+                </ul>
+            </section>
+        </main>
+
+    </body>
+</html>

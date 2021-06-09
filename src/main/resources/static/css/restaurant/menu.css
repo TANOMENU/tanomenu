@@ -1,0 +1,113 @@
+/*main*/
+.restaurant-menu-main {
+    align-self: center;
+    background-color: #eeeeeefa;
+    width: 1100px;
+    height: 85%;
+    border-radius: 10px;
+    box-shadow: 1px 4px 13px #0000003d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+/*menu top*/
+.restaurant-menu-main-top h1 {
+    font-size: 25px;
+    text-align: center;
+}
+
+.restaurant-menu-main-top .gallery {
+    width: 800px;
+    height: 230px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.restaurant-menu-main-top .gallery-cell {
+    width: 100%;
+    height: 100%;
+    margin-right: 10px;
+    counter-increment: gallery-cell;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--gray-dark);
+
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
+    font-size: 25px;
+    text-shadow: 2px 2px 3px black;
+    line-height: 70px;
+}
+
+/* See https://flickity.metafizzy.co/style.html for more options*/
+.flickity-page-dots .dot {
+    background: var(--gray-darker);
+}
+
+.flickity-page-dots .dot.is-selected {
+    background: var(--primary-color);
+}
+
+.flickity-button {
+    background: var(--gray-darker);
+}
+.flickity-button:hover {
+    background: var(--primary-color);
+}
+
+.flickity-prev-next-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+}
+
+.flickity-button-icon {
+    fill: white;
+}
+
+.flickity-prev-next-button.previous {
+    left: -40px;
+}
+
+.flickity-prev-next-button.next {
+    right: -40px;
+}
+
+/*menu content*/
+.restaurant-menu-main-content {
+    width: 800px;
+}
+
+.restaurant-menu-main-content ul {
+    list-style: none;
+    margin-top: 30px;
+}
+
+.restaurant-menu-main-content ul li {
+    margin: 20px;
+}
+
+.restaurant-menu-main-content ul li h3 {
+    display: flex;
+    font-weight: normal;
+    white-space: nowrap;
+}
+.restaurant-menu-main-content ul li h3 span {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.restaurant-menu-main-content ul li h3 span:after {
+    content: "......................................................................................................................................................................................................................................................";
+}
+
+.restaurant-menu-main-content ul li p {
+    font-weight: lighter;
+}
