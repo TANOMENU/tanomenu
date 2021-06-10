@@ -122,6 +122,7 @@ public class RestaurantController {
                     .city("Piquete")
                     .state(State.SAO_PAULO)
                     .build())
+                .image("/upload/restaurantefoto.jpg")
                 .menu(Map.of(
                         "petiscos", petiscos,
                         "bebidas", bebidas

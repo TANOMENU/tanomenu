@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+    <head>
+        <th:block th:replace="common :: myHead" />
+        <title>Página inicial</title>
+        <th:block th:replace="common :: flickityMeta" />
+        <link href="/css/home.css" rel="stylesheet">
+    </head>
+    <body class="base base-background-color">
+        <th:block th:replace="common :: myHeader" />
+
+        <main class="home-page-main">
+            <!--/*@thymesVar id="restaurantsByCategories" type="java.util.Map<java.lang.String, java.util.List<tanomenu.models.Restaurant>>"*/-->
+            <section class="home-page-section"
+                     th:each="entry, stat :${restaurantsByCategories}"
+            >
+                <h3 class="home-page-section-title" th:text="${entry.key}">Categoria</h3>
+
+                <div class="home-page-section-restaurants js-flickity" data-flickity='{ "cellAlign": "left", "freeScroll": true, "prevNextButtons": false, "contain": true, "groupCells": true }'>
+                    <div class="home-page-section-restaurant"
+                         th:each="restaurant :${entry.value}"
+                    >
+                        <a th:href="@{/restaurant/{uuid}(uuid=${restaurant.uuid})}"
+                           th:title="${restaurant.tradeName}"
+                           th:style="'background-image: url(' + ${restaurant.image} + ')'"
+                        >
+                            <h4 th:text="${restaurant.tradeName}"></h4>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    </body>
+</html>
