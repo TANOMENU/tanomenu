@@ -15,6 +15,7 @@
     --gray-darker: #535353;
 }
 
+/*
 ::-webkit-scrollbar {
     width: 11px;
     border-radius: 1%;
@@ -36,7 +37,7 @@
 ::-webkit-scrollbar-thumb:hover {
     background-color: #7272727e;
 }
-
+*/
 
 /*components*/
 .field {

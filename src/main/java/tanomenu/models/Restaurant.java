@@ -35,6 +35,8 @@ public class Restaurant implements Model<Restaurant> {
     @NotNull
     private Address address;
 
+    private String image;
+
     private Map<String, List<Product>> menu;
 
     @Override

@@ -2,6 +2,7 @@ package tanomenu.controllers;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -9,6 +10,7 @@ import tanomenu.config.AuthUserDetails;
 import tanomenu.repository.RestaurantRepository;
 import tanomenu.repository.UserRepository;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Controller
@@ -24,12 +26,17 @@ public class HomeController {
     }
 
     @GetMapping
-    public ModelAndView index(@AuthenticationPrincipal AuthUserDetails userDetails) {
-        return new ModelAndView("index", Map.of(
-                "currentUser", userRepository.find(userDetails.getUUID()).get(),
-                "allUsers", userRepository.findAll(),
-                "allRestaurants", restaurantRepository.findAll())
-        );
+    public String index(Model model) {
+        var restaurants = restaurantRepository.findAll();
+        var restaurantsByCategories = new LinkedHashMap<>() {{
+            put("Seus Favoritos", restaurants);
+            put("Mais Bem Avaliados", restaurants);
+            put("Churrascarias", restaurants);
+            put("Você também pode gostar", restaurants);
+            put("Saladas", restaurants);
+        }};
+        model.addAttribute("restaurantsByCategories", restaurantsByCategories);
+        return "home";
     }
 
 }

@@ -16,13 +16,13 @@
 
             <h2>Todos os usuários</h2>
             <ul style="margin: 30px;">
-                <!--/*@thymesVar id="allRestaurants" type="List"*/-->
+                <!--/*@thymesVar id="allUsers" type="java.util.List<tanomenu.models.User>"*/-->
                 <li th:each="user: ${allUsers}" th:text="${user}"></li>
             </ul>
 
             <h2>Todos os restaurantes</h2>
             <ul style="margin: 30px;">
-                <!--/*@thymesVar id="allRestaurants" type="List"*/-->
+                <!--/*@thymesVar id="allRestaurants" type="java.util.List<tanomenu.models.Restaurant>"*/-->
                 <li th:each="restaurant: ${allRestaurants}" th:text="${restaurant}"></li>
             </ul>
         </main>

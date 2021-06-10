@@ -8,8 +8,13 @@
       <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     </th:block>
 
+    <th:block th:fragment="flickityMeta">
+        <link rel="stylesheet" href="/lib/flickity@2.2.2/flickity.min.css">
+        <script src="/lib/flickity@2.2.2/flickity.min.js"></script>
+    </th:block>
+
     <header th:fragment="myHeader" class="base-header" >
-        <a class="base-logo" href="#"><img src="/img/logo.png" alt="TANOMENU"></a>
+        <a class="base-logo" href="/"><img src="/img/logo.png" alt="TANOMENU"></a>
 
         <div class="badge" sec:authorize="isAuthenticated()">
             <button th:with="user=${@userRepository.find(#authentication.principal.getUUID()).get()}">

@@ -5,8 +5,7 @@
     <head>
         <th:block th:replace="common :: myHead" />
         <title th:text="${restaurant.getTradeName()}">Nome do Restaurante</title>
-        <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-        <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+        <th:block th:replace="common :: flickityMeta" />
         <link href="/css/restaurant/menu.css" rel="stylesheet">
     </head>
     <body class="base base-background-image">

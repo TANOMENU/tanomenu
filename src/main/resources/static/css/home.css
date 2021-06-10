@@ -1,0 +1,67 @@
+.home-page-main {
+    display: flex;
+    flex-direction: column;
+    margin: 40px 40px 20px 40px;
+}
+
+.home-page-section-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.home-page-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.home-page-section-restaurants {
+    --cell-width: 150px;
+    --cell-height: 175px;
+    --cell-text-height: 25px;
+
+    width: 100%;
+    height: var(--cell-height);
+}
+
+.home-page-section-restaurant {
+    display: flex;
+    margin-right: 30px;
+    width: var(--cell-width);
+    height: var(--cell-height);
+}
+
+.home-page-section-restaurant a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+    width: var(--cell-width);
+    height: calc(var(--cell-height) - var(--cell-text-height));
+    justify-content: flex-end;
+    border: 5px white solid;
+    box-shadow: 1px 1px 1px 1px var(--gray-dark);
+}
+
+.home-page-section-restaurant a h4 {
+    color: #3f3e3c;
+    font-size: 15px;
+    position: relative;
+    bottom: -25px;
+    white-space: nowrap;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/* See https://flickity.metafizzy.co/style.html for more options*/
+.flickity-page-dots .dot {
+    background: var(--gray-darker);
+}
+
+.flickity-page-dots .dot.is-selected {
+    background: var(--primary-color);
+}
