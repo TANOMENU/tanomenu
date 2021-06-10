@@ -14,7 +14,6 @@ import tanomenu.repository.UserRepository;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AuthUserDetailsService authUserService;
-    private UserRepository userRepository;
     private final PasswordEncoder bCryptPasswordEncoder;
 
     public WebSecurityConfig(AuthUserDetailsService authUserService, PasswordEncoder bcryptPasswordEncoder) {
@@ -26,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-            .antMatchers("/css/**", "/img/**", "/lib/**", "/login", "/sign-up").permitAll()
+                .antMatchers("/css/**", "/img/**", "/lib/**", "/login", "/sign-up").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
