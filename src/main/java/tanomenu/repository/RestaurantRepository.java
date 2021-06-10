@@ -1,6 +1,5 @@
 package tanomenu.repository;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import tanomenu.models.Restaurant;
 
