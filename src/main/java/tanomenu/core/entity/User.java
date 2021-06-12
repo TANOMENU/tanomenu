@@ -1,6 +1,7 @@
-package tanomenu.models;
+package tanomenu.core.entity;
 
 import lombok.*;
+import tanomenu.core.Entity;
 
 import javax.validation.constraints.NotBlank;
 import java.util.UUID;
@@ -9,20 +10,16 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-public class User implements Model<User> {
+public class User implements Entity<User> {
 
     private UUID uuid;
 
-    @NotBlank(message = "Não pode estar em branco")
     private String name;
 
-    @NotBlank
     private String email;
 
-    @NotBlank
     private String cpf;
 
-    @NotBlank
     private String password;
 
     @SneakyThrows
@@ -37,4 +34,5 @@ public class User implements Model<User> {
         this.password = user.getPassword();
         this.cpf = user.getCpf();
     }
+
 }

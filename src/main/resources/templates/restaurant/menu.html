@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
-    <!--/*@thymesVar id="restaurant" type="tanomenu.models.Restaurant"*/-->
-    <!--/*@thymesVar id="gallery" type="List<tanomenu.models.restaurant.Product>"*/-->
+<!--/*@thymesVar id="restaurant" type="tanomenu.core.entity.Restaurant"*/-->
+<!--/*@thymesVar id="gallery" type="List<tanomenu.core.entity.restaurant.Product>"*/-->
     <head>
         <th:block th:replace="common :: myHead" />
         <title th:text="${restaurant.getTradeName()}">Nome do Restaurante</title>

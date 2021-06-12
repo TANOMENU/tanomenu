@@ -10,7 +10,7 @@
         <th:block th:replace="common :: myHeader" />
 
         <main class="home-page-main">
-            <!--/*@thymesVar id="restaurantsByCategories" type="java.util.Map<java.lang.String, java.util.List<tanomenu.models.Restaurant>>"*/-->
+            <!--/*@thymesVar id="restaurantsByCategories" type="java.util.Map<java.lang.String, java.util.List<tanomenu.core.entity.Restaurant>>"*/-->
             <section class="home-page-section"
                      th:each="entry, stat :${restaurantsByCategories}"
             >
@@ -22,7 +22,7 @@
                     >
                         <a th:href="@{/restaurant/{uuid}(uuid=${restaurant.uuid})}"
                            th:title="${restaurant.tradeName}"
-                           th:style="'background-image: url(' + ${restaurant.image} + ')'"
+                           th:style="'background-image: url(/upload/' + ${restaurant.image} + ')'"
                         >
                             <h4 th:text="${restaurant.tradeName}"></h4>
                         </a>

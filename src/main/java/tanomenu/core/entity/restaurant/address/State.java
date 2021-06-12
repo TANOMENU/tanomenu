@@ -1,4 +1,4 @@
-package tanomenu.models.restaurant;
+package tanomenu.core.entity.restaurant.address;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

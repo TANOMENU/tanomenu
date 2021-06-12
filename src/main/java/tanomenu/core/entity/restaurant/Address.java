@@ -1,9 +1,10 @@
-package tanomenu.models.restaurant;
+package tanomenu.core.entity.restaurant;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import tanomenu.core.entity.restaurant.address.State;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;

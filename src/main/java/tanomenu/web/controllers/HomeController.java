@@ -1,13 +1,15 @@
-package tanomenu.controllers;
+package tanomenu.web.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import tanomenu.repository.RestaurantRepository;
-import tanomenu.repository.UserRepository;
+import tanomenu.core.entity.Restaurant;
+import tanomenu.core.repository.RestaurantRepository;
+import tanomenu.core.repository.UserRepository;
 
 import java.util.LinkedHashMap;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/")
@@ -24,13 +26,9 @@ public class HomeController {
     @GetMapping
     public String index(Model model) {
         var restaurants = restaurantRepository.findAll();
-        var restaurantsByCategories = new LinkedHashMap<>() {{
-            put("Seus Favoritos", restaurants);
-            put("Mais Bem Avaliados", restaurants);
-            put("Churrascarias", restaurants);
-            put("Você também pode gostar", restaurants);
-            put("Saladas", restaurants);
-        }};
+        var restaurantsByCategories = restaurants.stream()
+                .filter(r -> r.getCategory() != null)
+                .collect(Collectors.groupingBy(r -> r.getCategory().getValue()));
         model.addAttribute("restaurantsByCategories", restaurantsByCategories);
         return "home";
     }

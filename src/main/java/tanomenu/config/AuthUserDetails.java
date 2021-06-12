@@ -2,7 +2,7 @@ package tanomenu.config;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import tanomenu.models.User;
+import tanomenu.core.entity.User;
 
 import java.util.Collection;
 import java.util.List;

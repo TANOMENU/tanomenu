@@ -1,12 +1,12 @@
-package tanomenu.controllers.restaurant;
+package tanomenu.web.controllers.restaurant;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import tanomenu.models.Restaurant;
-import tanomenu.repository.RestaurantRepository;
+import tanomenu.core.entity.Restaurant;
+import tanomenu.core.repository.RestaurantRepository;
 
 import java.util.Optional;
 import java.util.UUID;

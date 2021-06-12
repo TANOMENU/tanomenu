@@ -11,7 +11,7 @@
         <main class="login-signup">
             <h1 class="page-title">Criar uma Conta</h1>
 
-            <form action="#" th:action="@{/sign-up}" th:object="${user}" method="post">
+            <form action="#" th:action="@{/sign-up}" th:object="${dto}" method="post">
                 <label class="field">
                     Nome
                     <input type="text" th:field="*{name}"/>
