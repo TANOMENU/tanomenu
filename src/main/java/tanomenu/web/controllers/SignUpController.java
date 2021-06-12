@@ -31,7 +31,7 @@ public class SignUpController {
     @GetMapping("/sign-up")
     @PreAuthorize("isAnonymous()")
     public String signUp(Model model) {
-        model.addAttribute("dto", new UserSignUpDto());
+        model.addAttribute("userSignUpDto", new UserSignUpDto());
         return "sign-up";
     }
 

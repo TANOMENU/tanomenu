@@ -1,4 +1,4 @@
-package tanomenu.web.dto;
+package tanomenu.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
