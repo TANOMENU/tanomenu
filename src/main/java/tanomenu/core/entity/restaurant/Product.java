@@ -1,4 +1,4 @@
-package tanomenu.models.restaurant;
+package tanomenu.core.entity.restaurant;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

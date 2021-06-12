@@ -3,7 +3,7 @@ package tanomenu.config;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import tanomenu.repository.UserRepository;
+import tanomenu.core.repository.UserRepository;
 
 @Service
 public class AuthUserDetailsService implements UserDetailsService {

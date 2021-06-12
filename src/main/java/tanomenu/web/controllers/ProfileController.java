@@ -1,4 +1,4 @@
-package tanomenu.controllers;
+package tanomenu.web.controllers;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -7,8 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import tanomenu.config.AuthUserDetails;
-import tanomenu.models.User;
-import tanomenu.repository.UserRepository;
+import tanomenu.core.entity.User;
+import tanomenu.core.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;

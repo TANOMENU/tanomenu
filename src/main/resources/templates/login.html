@@ -11,7 +11,7 @@
         <main class="login-signup">
             <h1 class="page-title">Fazer Login</h1>
 
-            <form action="#" th:action="@{/login}" th:object="${user}" method="post">
+            <form action="#" th:action="@{/login}" th:object="${dto}" method="post">
                 <h3 th:if="${param.error}" class="alert alert-error">
                     Nome de usuário e senha inválidos
                 </h3>

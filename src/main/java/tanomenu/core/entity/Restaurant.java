@@ -1,11 +1,12 @@
-package tanomenu.models;
+package tanomenu.core.entity;
 
 import lombok.*;
-import tanomenu.models.restaurant.Product;
-import tanomenu.models.restaurant.Address;
+import org.springframework.web.multipart.MultipartFile;
+import tanomenu.core.Entity;
+import tanomenu.core.entity.restaurant.Category;
+import tanomenu.core.entity.restaurant.Product;
+import tanomenu.core.entity.restaurant.Address;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -14,28 +15,25 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-public class Restaurant implements Model<Restaurant> {
+public class Restaurant implements Entity<Restaurant> {
 
     private UUID uuid;
 
     private UUID userUuid;
 
-    @NotBlank
     private String companyName;
 
-    @NotBlank
     private String tradeName;
 
-    @NotNull
     private String cnpj;
 
-    @NotNull
     private String phone;
 
-    @NotNull
     private Address address;
 
-    private String image;
+    private UUID image;
+
+    private Category category;
 
     private Map<String, List<Product>> menu;
 

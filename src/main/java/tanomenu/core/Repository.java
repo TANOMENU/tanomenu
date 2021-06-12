@@ -1,58 +1,59 @@
-package tanomenu.repository;
-
-import tanomenu.models.Model;
+package tanomenu.core;
 
 import javax.annotation.PreDestroy;
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Repository<T extends Model<T>> {
+public class Repository<T extends Entity<T>> {
 
-    private final String name;
+    private final File file;
+
     protected final List<T> data;
 
     public Repository() {
-        this.name = String.format("%s.%s", this.getClass().getSimpleName(), "repository-data");
+        this.file = make_dirs();
         this.data = recover_data();
     }
 
+    private File make_dirs() {
+        var path = String.format("%s/repo/%s.ser", System.getProperty("user.dir"), this.getClass().getSimpleName());
+        var file = new File(path);
+        try {
+            if(!file.getParentFile().mkdirs() && !file.getParentFile().exists()) {
+                throw new RepositoryException("Cannot make repository directory");
+            }
+        } catch (SecurityException e) {
+            throw new RepositoryException(e);
+        }
+
+        return file;
+    }
+
     private List<T> recover_data() {
-        try(
-                var fis = new FileInputStream(this.name);
-                var ois = new ObjectInputStream(fis)
-        ) {
+        try(var fis = new FileInputStream(this.file);
+            var ois = new ObjectInputStream(fis)) {
             return Collections.synchronizedList((List<T>) ois.readObject());
         }
-        catch (FileNotFoundException e)
-        {
+        catch (FileNotFoundException e) {
             return Collections.synchronizedList(new ArrayList<>());
         }
-        catch (IOException e)
-        {
-            throw new RepositoryCannotLoadDataException("Error deserializing repository data", e);
-        }
-        catch (ClassCastException e)
-        {
-            throw new RepositoryCannotLoadDataException("Error casting data", e);
-        }
-        catch (ClassNotFoundException e)
-        {
-            throw new RepositoryCannotLoadDataException("Class not found", e);
+        catch (IOException | ClassCastException | ClassNotFoundException  e) {
+            throw new RepositoryException(e);
         }
     }
 
     @PreDestroy
     public void persist_data() {
         try(
-                var fos = new FileOutputStream(name);
+                var fos = new FileOutputStream(this.file);
                 var oos = new ObjectOutputStream(fos)
         ) {
             oos.writeObject(this.data);
         }
         catch (IOException e)
         {
-            throw new RepositoryCannotLoadDataException("Error serializing repository data", e);
+            throw new RepositoryException(e);
         }
     }
 
@@ -86,7 +87,7 @@ public class Repository<T extends Model<T>> {
 
     public List<T> findAll() {
         return data.stream()
-                .map(Model::clone)
+                .map(Entity::clone)
                 .collect(Collectors.toList());
     }
 

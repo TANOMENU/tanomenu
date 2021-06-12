@@ -38,4 +38,5 @@ out/
 
 
 ### Data ###
-*.repository-data
+/repo/
+/upload/

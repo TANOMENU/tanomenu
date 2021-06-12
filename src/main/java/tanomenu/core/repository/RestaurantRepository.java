@@ -1,7 +1,8 @@
-package tanomenu.repository;
+package tanomenu.core.repository;
 
 import org.springframework.stereotype.Service;
-import tanomenu.models.Restaurant;
+import tanomenu.core.Repository;
+import tanomenu.core.entity.Restaurant;
 
 import java.util.Optional;
 

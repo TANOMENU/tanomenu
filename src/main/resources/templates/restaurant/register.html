@@ -11,7 +11,7 @@
         <main class="register-restaurant">
             <h1 class="page-title">Cadastrar Restaurante</h1>
 
-            <form method="post" th:action="@{/restaurant/register}" th:object="${restaurant}">
+            <form method="post" th:action="@{/restaurant/register}" th:object="${restaurantRegisterDto}" enctype="multipart/form-data">
                 <div class="fieldsets-container">
                     <fieldset>
                         <label class="field">
@@ -34,7 +34,21 @@
                             <input type="text" th:field="*{phone}"/>
                             <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
                         </label>
+                        <label class="field">
+                            Ramo alimentício
+                            <select th:field="*{category}">
+                                <option th:each="stateOpt : ${T(tanomenu.core.entity.restaurant.Category).values()}"
+                                        th:value="${stateOpt}" th:text="${stateOpt.getValue()}"></option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('address.state')}" th:errors="*{address.state}"></span>
+                        </label>
+                        <label class="field">
+                            Foto
+                            <input type="file" th:field="*{image}"/>
+                            <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+                        </label>
                     </fieldset>
+
                     <fieldset>
                         <label class="field">
                             Logradouro
@@ -59,7 +73,7 @@
                         <label class="field">
                             Estado
                             <select th:field="*{address.state}">
-                                <option th:each="stateOpt : ${T(tanomenu.models.restaurant.State).values()}"
+                                <option th:each="stateOpt : ${T(tanomenu.core.entity.restaurant.address.State).values()}"
                                         th:value="${stateOpt}" th:text="${stateOpt.getName()}"></option>
                             </select>
                             <span th:if="${#fields.hasErrors('address.state')}" th:errors="*{address.state}"></span>
