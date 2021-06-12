@@ -3,45 +3,50 @@
     <head>
         <th:block th:replace="common :: myHead" />
         <link href="/css/restaurant/profile.css" rel="stylesheet">
-        <title>Perfil do Restaurant</title>
+        <title>Perfil do Restaurante</title>
     </head>
-    <body>
+    <body class="base base-background-color">
+        <div class="main-container home-page-main" >
+            <!--/*@thymesVar id="restaurant" type="tanomenu.core.entity.Restaurant"*/-->
 
-        <div class="main-container" >
             <div class="image-profile">
-                <img id="img-profile" src="/img/billie.png">
-                <a href="#"><img class="icon" src="/img/icons/Pencil.svg"> </a>
+                <img id="img-profile" th:src="'/upload/' + ${restaurant.getImage()}">
+
+                <a th:href="@{/restaurant/profile/edit/{uuid} (uuid=${restaurant.getUuid()})}"><img class="icon" src="/img/icons/Pencil.svg"></a>
             </div>
 
             <div class="name-profile">
-                <!--/*@thymesVar id="restaurant" type="tanomenu.core.entity.Restaurant"*/-->
+
                 <h1 th:text="${restaurant.getTradeName()}">Name of restaurant</h1>
-                <a href="#"><img class="icon" src="/img/icons/Pencil.svg"></a>
+                <a th:href="@{/restaurant/profile/edit/{uuid} (uuid=${restaurant.getUuid()})}"><img class="icon" src="/img/icons/Pencil.svg"></a>
             </div>
             <form>
-                <a href="#">
-                    <img src="/img/icons/bell.svg">
-                    <h3>Notificações</h3>
-                    <p>Altere as opções de notificação</p>
-                    <hr>
+                <a th:href="@{/restaurant/profile/edit/{uuid} (uuid=${restaurant.getUuid()})}" data-bs-toggle="modal" data-bs-target="#security-modal">
+                    <img src="/img/icons/bell.svg" class="a-icon">
+                    <h2>Telefone</h2>
+                    <p>Altere seu número de telefone</p>
+                    <img src="/img/icons/chevron-right.svg" class="arrow">
                 </a>
 
                 <a href="#">
-                    <img src="/img/icons/map-pin.svg">
-                    <h3>Localização</h3>
+                    <img src="/img/icons/map-pin.svg" class="a-icon">
+                    <h2>Localização</h2>
                     <p>Altere a localização de seu restaurante</p>
-                    <hr>
+                    <img src="/img/icons/chevron-right.svg" class="arrow">
                 </a>
 
                 <a href="#">
-                    <img src="/img/icons/alert-circle.svg">
-                    <h3>Segurança</h3>
+                    <img src="/img/icons/alert-circle.svg" class="a-icon">
+                    <h2>Segurança</h2>
                     <p>altere as opções de segurança de sua conta</p>
-                    <hr>
+                    <img src="/img/icons/chevron-right.svg" class="arrow">
                 </a>
             </form>
 
-            <th:block th:replace="common :: myHeader" />
+            <footer>
+                <img src="/img/logo.png">
+                <th:block th:replace="common :: myFooter" />
+            </footer>
         </div>
     </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import tanomenu.config.AuthUserDetails;
 import tanomenu.core.entity.User;
+import tanomenu.core.repository.RestaurantRepository;
 import tanomenu.core.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,10 +19,12 @@ import java.util.Optional;
 public class ProfileController {
     private final UserRepository userRepository;
     private final PasswordEncoder bCryptPasswordEncoder;
+    private final RestaurantRepository restaurantRepository;
 
-    public ProfileController(UserRepository userRepository, PasswordEncoder bCryptPasswordEncoder) {
+    public ProfileController(UserRepository userRepository, PasswordEncoder bCryptPasswordEncoder, RestaurantRepository restaurantRepository) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.restaurantRepository = restaurantRepository;
     }
 
     @GetMapping

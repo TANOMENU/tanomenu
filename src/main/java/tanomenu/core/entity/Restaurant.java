@@ -43,6 +43,7 @@ public class Restaurant implements Entity<Restaurant> {
         this.tradeName = restaurant.getTradeName();
         this.cnpj = restaurant.getCnpj();
         this.address = restaurant.getAddress();
+        this.image = restaurant.getImage();
     }
 
     @SneakyThrows
