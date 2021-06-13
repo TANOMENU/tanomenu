@@ -11,7 +11,7 @@
 
         <main class="home-page-main">
             <!--/*@thymesVar id="restaurantsByCategories" type="java.util.Map<java.lang.String, java.util.List<tanomenu.core.entity.Restaurant>>"*/-->
-            <section class="home-page-section"
+            <section th:unless="${restaurantsByCategories.isEmpty()}" class="home-page-section"
                      th:each="entry, stat :${restaurantsByCategories}"
             >
                 <h3 class="home-page-section-title" th:text="${entry.key}">Categoria</h3>
@@ -29,6 +29,10 @@
                     </div>
                 </div>
             </section>
+
+            <th:block th:if="${restaurantsByCategories.isEmpty()}">
+                <th:block th:replace="common :: ooops('Nenhum restaurante disponível!')" />
+            </th:block>
         </main>
 
     </body>
