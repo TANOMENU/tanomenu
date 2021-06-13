@@ -11,13 +11,13 @@ import java.util.*;
 @Service
 public class StorageService {
 
-    private final File dir;
+    private final File file;
 
     public StorageService() {
-        this.dir = make_dir();
+        this.file = ensure_dir();
     }
 
-    private File make_dir() {
+    private File ensure_dir() {
         var path = String.format("%s/upload/", System.getProperty("user.dir"));
         var dir = new File(path);
         try {
@@ -31,7 +31,7 @@ public class StorageService {
     }
 
     private File fileOf(UUID uuid) {
-        var file = Paths.get(this.dir.getAbsolutePath(), uuid.toString());
+        var file = Paths.get(this.file.getAbsolutePath(), uuid.toString());
         return new File(file.toString());
     }
 
@@ -55,6 +55,13 @@ public class StorageService {
         catch (IOException | ClassCastException e) {
             throw new RepositoryException(e);
         }
+    }
+
+    public UUID update(UUID uuid, MultipartFile multipartFile) {
+        if(!delete(uuid)) {
+            throw new RepositoryException();
+        }
+        return save(multipartFile);
     }
 
     public boolean delete(UUID uuid) {

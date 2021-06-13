@@ -2,6 +2,8 @@ package tanomenu.core;
 
 public class RepositoryException extends RuntimeException{
 
+    public RepositoryException() { }
+
     public RepositoryException(String message) {
         super(message);
     }
@@ -13,5 +15,4 @@ public class RepositoryException extends RuntimeException{
     public RepositoryException(String message, Throwable cause) {
         super(message, cause);
     }
-
 }
