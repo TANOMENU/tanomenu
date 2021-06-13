@@ -30,7 +30,9 @@
                 </div>
             </section>
 
-            <th:block th:if="${restaurantsByCategories.isEmpty()}" th:replace="common :: ooops('Nenhum restaurante disponível!')" />
+            <th:block th:if="${restaurantsByCategories.isEmpty()}">
+                <th:block th:replace="common :: ooops('Nenhum restaurante disponível!')" />
+            </th:block>
         </main>
 
     </body>
