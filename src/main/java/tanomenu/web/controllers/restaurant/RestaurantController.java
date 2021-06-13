@@ -1,4 +1,4 @@
-package tanomenu.web.controllers;
+package tanomenu.web.controllers.restaurant;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

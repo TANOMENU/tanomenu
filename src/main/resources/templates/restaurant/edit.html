@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+    <head>
+        <th:block th:replace="common :: myHead" />
+        <link href="/css/restaurant/profile.css" rel="stylesheet">
+        <title>Edit</title>
+    </head>
+
+    <body class="base base-background-color">
+        <div class="home-page-main">
+            <div class="image-profile">
+                <form class="main-container" th:action="@{/restaurant/profile/edit/{uuid} (uuid=${restaurant.getUuid()})}" th:object="${restaurant}" enctype="multipart/form-data" method="post">
+                    <img id="img-profile" th:src="'/upload/' + ${restaurant.getImage()}">
+
+                    <label class="field">
+                        Nome Fantasia
+                        <input type="text" th:field="*{tradeName}"/>
+                        <span th:if="${#fields.hasErrors('tradeName')}" th:errors="*{tradeName}"></span>
+                    </label>
+
+                    <label class="field">
+                        Telefone
+                        <input type="text" th:field="*{phone}"/>
+                        <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+                    </label>
+
+                    <label class="field">
+                        Ramo alimentício
+                        <select th:field="*{category}">
+                            <option th:each="stateOpt : ${T(tanomenu.core.entity.restaurant.Category).values()}"
+                                    th:value="${stateOpt}" th:text="${stateOpt.getValue()}"></option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('address.state')}" th:errors="*{address.state}"></span>
+                    </label>
+
+                    <label class="field">
+                        Foto
+                        <input type="file" th:field="*{image}"/>
+                        <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+                    </label>
+
+                    <button class="button submit" type="submit">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

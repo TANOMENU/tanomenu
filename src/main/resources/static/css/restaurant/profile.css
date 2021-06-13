@@ -16,20 +16,12 @@ header {
     margin-bottom: 20px;
 }
 
-header img {
-    display: flex;
-    width: 150px;
-    height: auto;
-}
-
 .main-container {
-    background-color: #EEEEEE;
-    width: 60%;
+    width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
-    border-radius: 20px;
 }
 
 .icon {
@@ -50,22 +42,32 @@ header img {
     width: 200px;
     height: 200px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .image-profile .icon {
     position: relative;
-    left: -30px;
-    bottom: -30px;
+    left: -50px;
+    bottom: -10px;
     background: white;
     border-radius: 50%;
     padding: 5px;
     margin-right: -30px;
 }
 
+.image-profile .icon:hover {
+    background-color: #cecece;
+}
+
+.main-container .field {
+    width: 350px;
+}
+
 .name-profile {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 25px;
     margin-right: -30px;
     height: auto;
 }
@@ -82,37 +84,67 @@ header img {
     height: 80%;
 }
 
+form {
+    margin-top: 30px;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
 form a {
-    margin-top: 10px;
+    margin: 10px;
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr 1fr auto;
     grid-template-rows: 1fr 1fr;
     gap: 0px 0px;
     grid-template-areas:
-    ". ."
-    "description description";
+    "title title arrow"
+    "description description arrow";
     text-decoration: none;
     height: auto;
+    align-content: center;
 }
 
-form a h3 {
+form a h2, .a-icon {
+    grid-area: title;
+}
+
+form a h2, p {
+    margin: 10px;
+}
+
+form a h2 {
     color: black;
     font-weight: normal;
+    margin-left: 55px;
 }
 
 form a p {
     color: #767676;
-}
-
-form a hr {
-    width: 850%;
-    color: #c7c6c6;
+    grid-area: description;
 }
 
 form a img {
-    margin-right: 10px;
+    width: 35px;
+    height: 35px;
+    margin-top: 10px;
 }
 
-form a p {
-    grid-area: description;
+
+form a .arrow {
+    grid-area: arrow;
+    margin-left: auto;
+}
+
+footer {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 150px;
+}
+
+footer img {
+    width: 150px;
 }
