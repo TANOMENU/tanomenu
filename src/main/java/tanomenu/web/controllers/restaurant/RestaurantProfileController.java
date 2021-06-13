@@ -77,7 +77,7 @@ public class RestaurantProfileController {
             }
             modelMapper.map(restaurantRegisterDto, r);
             if(!restaurantRegisterDto.getImage().isEmpty()) {
-                var image = storageService.save(restaurantRegisterDto.getImage());
+                var image = storageService.update(r.getImage(), restaurantRegisterDto.getImage());
                 r.setImage(image);
             }
             restaurantRepository.update(uuid, restaurant.get());
