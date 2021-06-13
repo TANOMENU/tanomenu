@@ -11,7 +11,7 @@
     --primary-color: #F8AC38;
     --secondary-color: #FD5555;
     --gray-light: #EEEEEE;
-    --gray-dark: #d4d3d361;
+    --gray-dark: #82828261;
     --gray-darker: #535353;
 }
 
@@ -117,6 +117,85 @@ body.base > header.base-header {
 
 body.base > header.base-header > a.base-logo > img {
     width: 200px;
+}
+
+body.base > header.base-header div.badge {
+    position: relative;
+}
+
+body.base > header.base-header div.badge label input {
+    display: none;
+}
+
+body.base > header.base-header div.badge img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+body.base > header.base-header div.badge .badge-dropdown {
+    display: none;
+}
+
+body.base > header.base-header div.badge label input:checked ~ .badge-dropdown {
+    display: block;
+    z-index: 999;
+}
+
+body.base > header.base-header div.badge .badge-dropdown {
+    position: absolute;
+    right: 0%;
+    top: 100%;
+    width: 250px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 1px 1px 12px 1px var(--gray-dark);
+}
+
+body.base > header.base-header div.badge .badge-dropdown:after {
+    bottom: 100%;
+    left: 92%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+body.base > header.base-header div.badge .badge-dropdown:after {
+    border-color: rgba(0, 0, 0, 0);
+    border-bottom-color: white;
+    border-width: 9px;
+    margin-left: -9px;
+}
+
+body.base > header.base-header div.badge .badge-dropdown ul {
+    list-style: none;
+}
+
+body.base > header.base-header div.badge .badge-dropdown ul li {
+    margin: 5px 0 5px 0;
+}
+
+body.base > header.base-header div.badge .badge-dropdown ul li a {
+    display: inline-flex;
+    text-decoration: none;
+    font-size: 17px;
+    color: black;
+    padding: 10px;
+    width: 100%;
+}
+
+body.base > header.base-header div.badge .badge-dropdown ul li a:hover {
+    background-color: var(--gray-light);
+}
+
+body.base > header.base-header div.badge .badge-dropdown ul li a .material-icons {
+    font-size: 20px; /* Preferred icon size */
+    margin-right: 10px;
 }
 
 

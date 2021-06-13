@@ -22,6 +22,8 @@ public class User implements Entity<User> {
 
     private String password;
 
+    private UUID image;
+
     @SneakyThrows
     @Override
     public User clone() {
