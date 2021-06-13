@@ -17,12 +17,23 @@
     <header th:fragment="myHeader" class="base-header" >
         <a class="base-logo" href="/"><img src="/img/logo.png" alt="TANOMENU"></a>
 
+        <form sec:authorize="isAuthenticated()"
+              class="search-box"
+              action="/search"
+              method="get"
+        >
+            <input type="search" placeholder="Pesquise locais..." name="q">
+            <button type="submit">
+                <span class="material-icons">search</span>
+            </button>
+        </form>
+
         <div sec:authorize="isAuthenticated()"
              th:with="user=${@userRepository.find(#authentication.principal.getUUID()).get()}"
              class="badge"
         >
             <label>
-                <img th:src="@{/upload/{uuid} (uuid=${user.image})}">
+                <img th:src="${user.image} ? @{/upload/{uuid} (uuid=${user.image})} : @{/img/user-icon.png}">
                 <input type="checkbox">
                 <nav class="badge-dropdown">
                     <ul>

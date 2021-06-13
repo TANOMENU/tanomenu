@@ -15,6 +15,14 @@
     --gray-darker: #535353;
 }
 
+/* clears the 'X' from Chrome input */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}
+
 /*
 ::-webkit-scrollbar {
     width: 11px;
@@ -94,13 +102,23 @@ body.base {
     height: 100vh;
 }
 
-body.base.base-background-image {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background: url("/img/background.png");
+body.base.base-background-image:before {
+    content: ' ';
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    background-image: url('/img/background.png');
+    background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+}
+
+body.base.base-background-image.base-background-image-50:before {
+    opacity: 0.5;
 }
 
 body.base.base-background-color {
@@ -111,16 +129,46 @@ body.base.base-background-color {
 /*header*/
 body.base > header.base-header {
     padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 body.base > header.base-header > a.base-logo > img {
     width: 200px;
+    place-self: start;
+}
+
+body.base > header.base-header .search-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+body.base > header.base-header .search-box input {
+    border: none;
+    outline: none;
+    padding: 13px 40px 13px 13px;
+    width: 450px;
+    font-size: 18px;
+    border-radius: 15px;
+    box-shadow: 2px 2px 2px #ccc;
+}
+
+body.base > header.base-header .search-box button {
+    background: none;
+    border: none;
+    position: relative;
+    padding: 10px;
+    cursor: pointer;
+    left: -44px;
+    margin-right: -44px;
+    border-radius: 15px;
 }
 
 body.base > header.base-header div.badge {
     position: relative;
+    place-self: end;
+    align-self: center;
 }
 
 body.base > header.base-header div.badge label input {
@@ -133,6 +181,7 @@ body.base > header.base-header div.badge img {
     border-radius: 50px;
     object-fit: cover;
     cursor: pointer;
+    background: var(--gray-light);
 }
 
 body.base > header.base-header div.badge .badge-dropdown {
@@ -147,7 +196,7 @@ body.base > header.base-header div.badge label input:checked ~ .badge-dropdown {
 body.base > header.base-header div.badge .badge-dropdown {
     position: absolute;
     right: 0%;
-    top: 100%;
+    top: 110%;
     width: 250px;
     border-radius: 5px;
     background-color: white;
