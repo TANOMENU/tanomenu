@@ -14,15 +14,17 @@ public class RestaurantRepository extends Repository<Restaurant> {
 
     public Optional<Restaurant> findByCnpj(String cnpj) {
         return data.stream()
-                .filter(r -> r.getCnpj().equals(cnpj))
+                .parallel()
                 .map(Restaurant::clone)
+                .filter(r -> r.getCnpj().equals(cnpj))
                 .findFirst();
     }
 
     public List<Restaurant> findByOwner(UUID uuid) {
         return data.stream()
-                .filter(r -> r.getUserUuid().equals(uuid))
+                .parallel()
                 .map(Restaurant::clone)
+                .filter(r -> r.getUserUuid().equals(uuid))
                 .collect(Collectors.toList());
     }
 

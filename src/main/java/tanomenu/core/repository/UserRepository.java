@@ -11,8 +11,9 @@ public class UserRepository extends Repository<User> {
 
     public Optional<User> findByEmail(String email) {
         return data.stream()
-                .filter(u -> u.getEmail().equals(email))
+                .parallel()
                 .map(User::clone)
+                .filter(u -> u.getEmail().equals(email))
                 .findFirst();
     }
 

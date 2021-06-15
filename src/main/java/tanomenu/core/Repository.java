@@ -12,11 +12,11 @@ public class Repository<T extends Entity<T>> {
     protected final List<T> data;
 
     public Repository() {
-        this.file = make_dirs();
-        this.data = recover_data();
+        this.file = makeDirs();
+        this.data = recoverData();
     }
 
-    private File make_dirs() {
+    private File makeDirs() {
         var path = String.format("%s/repo/%s.ser", System.getProperty("user.dir"), this.getClass().getSimpleName());
         var file = new File(path);
         try {
@@ -30,7 +30,7 @@ public class Repository<T extends Entity<T>> {
         return file;
     }
 
-    private List<T> recover_data() {
+    private List<T> recoverData() {
         try(var fis = new FileInputStream(this.file);
             var ois = new ObjectInputStream(fis)) {
             return Collections.synchronizedList((List<T>) ois.readObject());
@@ -44,11 +44,9 @@ public class Repository<T extends Entity<T>> {
     }
 
     @PreDestroy
-    public void persist_data() {
-        try(
-                var fos = new FileOutputStream(this.file);
-                var oos = new ObjectOutputStream(fos)
-        ) {
+    private void persistData() {
+        try(var fos = new FileOutputStream(this.file);
+            var oos = new ObjectOutputStream(fos)) {
             oos.writeObject(this.data);
         }
         catch (IOException e)
@@ -59,7 +57,9 @@ public class Repository<T extends Entity<T>> {
 
     public Optional<T> find(UUID uuid) {
         return data.stream()
+                .parallel()
                 .filter(u -> u.getUuid().equals(uuid))
+                .map(Entity::clone)
                 .findFirst();
     }
 
@@ -72,6 +72,7 @@ public class Repository<T extends Entity<T>> {
 
     public T update(UUID uuid, T t) {
         var result = data.stream()
+                .parallel()
                 .filter(u -> u.getUuid().equals(uuid))
                 .findFirst();
 
@@ -87,6 +88,7 @@ public class Repository<T extends Entity<T>> {
 
     public List<T> findAll() {
         return data.stream()
+                .parallel()
                 .map(Entity::clone)
                 .collect(Collectors.toList());
     }
