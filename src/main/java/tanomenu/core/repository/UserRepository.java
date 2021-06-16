@@ -10,9 +10,7 @@ import java.util.*;
 public class UserRepository extends Repository<User> {
 
     public Optional<User> findByEmail(String email) {
-        return data.stream()
-                .parallel()
-                .map(User::clone)
+        return getStream()
                 .filter(u -> u.getEmail().equals(email))
                 .findFirst();
     }
