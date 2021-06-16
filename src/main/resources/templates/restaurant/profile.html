@@ -21,30 +21,23 @@
                 <a th:href="@{/restaurant/profile/edit/{uuid} (uuid=${restaurant.getUuid()})}"><img class="icon" src="/img/icons/Pencil.svg"></a>
             </div>
             <form>
-                <a th:href="@{/restaurant/profile/edit/{uuid} (uuid=${restaurant.getUuid()})}" data-bs-toggle="modal" data-bs-target="#security-modal">
+                <a th:href="@{/profile}" >
                     <img src="/img/icons/bell.svg" class="a-icon">
-                    <h2>Telefone</h2>
-                    <p>Altere seu número de telefone</p>
+                    <h2>Perfil</h2>
+                    <p>Altere suas informações do perfil</p>
                     <img src="/img/icons/chevron-right.svg" class="arrow">
                 </a>
 
-                <a href="#">
+                <a th:href="@{/restaurant/profile/edit/{uuid} (uuid=${restaurant.getUuid()})}">
                     <img src="/img/icons/map-pin.svg" class="a-icon">
-                    <h2>Localização</h2>
+                    <h2>Restaurante</h2>
                     <p>Altere a localização de seu restaurante</p>
-                    <img src="/img/icons/chevron-right.svg" class="arrow">
-                </a>
-
-                <a href="#">
-                    <img src="/img/icons/alert-circle.svg" class="a-icon">
-                    <h2>Segurança</h2>
-                    <p>altere as opções de segurança de sua conta</p>
                     <img src="/img/icons/chevron-right.svg" class="arrow">
                 </a>
             </form>
 
             <footer>
-                <img src="/img/logo.png">
+                <a th:href="@{/}"><img src="/img/logo.png"></a>
                 <th:block th:replace="common :: myFooter" />
             </footer>
         </div>
