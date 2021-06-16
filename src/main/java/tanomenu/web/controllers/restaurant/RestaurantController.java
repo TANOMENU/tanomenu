@@ -73,8 +73,8 @@ public class RestaurantController {
         restaurant.setUserUuid(userDetails.getUUID());
         var image = storageService.save(restaurantRegisterDto.getImage());
         restaurant.setImage(image);
-        restaurant = restaurantRepository.save(restaurant);
+        var restaurantUuid = restaurantRepository.save(restaurant);
 
-        return "redirect:/restaurant/profile/" + restaurant.getUuid();
+        return "redirect:/restaurant/profile/" + restaurantUuid;
     }
 }

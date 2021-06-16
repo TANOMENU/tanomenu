@@ -13,17 +13,13 @@ import java.util.stream.Collectors;
 public class RestaurantRepository extends Repository<Restaurant> {
 
     public Optional<Restaurant> findByCnpj(String cnpj) {
-        return data.stream()
-                .parallel()
-                .map(Restaurant::clone)
+        return getStream()
                 .filter(r -> r.getCnpj().equals(cnpj))
                 .findFirst();
     }
 
     public List<Restaurant> findByOwner(UUID uuid) {
-        return data.stream()
-                .parallel()
-                .map(Restaurant::clone)
+        return getStream()
                 .filter(r -> r.getUserUuid().equals(uuid))
                 .collect(Collectors.toList());
     }
