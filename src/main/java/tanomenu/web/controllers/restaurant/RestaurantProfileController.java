@@ -37,6 +37,8 @@ public class RestaurantProfileController {
     @GetMapping("/{uuid}")
     public String show(@PathVariable String uuid, Model model, @AuthenticationPrincipal AuthUserDetails userDetails) {
         Optional<Restaurant> restaurant;
+        var restaurants = restaurantRepository.findByOwner(userDetails.getUUID());
+        var user = userRepository.find(userDetails.getUUID());
         try {
             restaurant = restaurantRepository.find(UUID.fromString(uuid));
         } catch (IllegalArgumentException e) {
@@ -48,6 +50,8 @@ public class RestaurantProfileController {
                 return "redirect:/";
             }
             model.addAttribute("restaurant", r);
+            model.addAttribute("restaurants", restaurants);
+            model.addAttribute("user", user.get());
             return "/restaurant/profile";
         }).orElse("redirect:/");
     }
