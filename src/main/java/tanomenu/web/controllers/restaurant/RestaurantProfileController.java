@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import tanomenu.config.AuthUserDetails;
@@ -72,9 +73,9 @@ public class RestaurantProfileController {
         Optional<Restaurant> restaurant = restaurantRepository.find(uuid);
 
         return restaurant.map(r -> {
-            if(!r.getUserUuid().equals(userDetails.getUUID())) {
+            if(!r.getUserUuid().equals(userDetails.getUUID()))
                 return "redirect:/";
-            }
+
             modelMapper.map(restaurantRegisterDto, r);
             if(!restaurantRegisterDto.getImage().isEmpty()) {
                 var image = storageService.update(r.getImage(), restaurantRegisterDto.getImage());
