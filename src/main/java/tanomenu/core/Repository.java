@@ -19,6 +19,7 @@ public class Repository<T extends Entity<T>> {
 
     private File makeDirs() {
         var path = String.format("%s/repo/%s.ser", System.getProperty("user.dir"), this.getClass().getSimpleName());
+
         var file = new File(path);
         try {
             if(!file.getParentFile().mkdirs() && !file.getParentFile().exists()) {

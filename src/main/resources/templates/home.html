@@ -20,7 +20,7 @@
                     <div class="home-page-section-restaurant"
                          th:each="restaurant :${entry.value}"
                     >
-                        <a th:href="@{/restaurant/{uuid}(uuid=${restaurant.uuid})}"
+                        <a th:href="@{/restaurant/profile/{uuid}(uuid=${restaurant.uuid})}"
                            th:title="${restaurant.tradeName}"
                            th:style="'background-image: url(/upload/' + ${restaurant.image} + ')'"
                         >

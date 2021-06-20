@@ -24,4 +24,9 @@ public class RestaurantRepository extends Repository<Restaurant> {
                 .collect(Collectors.toList());
     }
 
+    public List<Restaurant> findByName(String name){
+        return getStream()
+                .filter(r -> r.getCompanyName().equals(name))
+                .collect(Collectors.toList());
+    }
 }
