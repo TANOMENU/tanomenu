@@ -10,7 +10,8 @@
         <th:block th:replace="common :: myHeader" />
         <main class="home-page-main">
             <section th:unless="${restaurants.isEmpty()}" class="home-page-section">
-                <h3 class="home-page-section-title">Categoria</h3>
+                <h3 class="home-page-section-title">Resultado da Busca</h3>
+                <p class="home-page-section-title"> <spam th:text="${restaurants.size()}"></spam> Estabelecimento(s) encontrado(s)!</p>
                 <div class="home-page-section-restaurants js-flickity"
                      data-flickity='{ "cellAlign": "left", "freeScroll": true, "prevNextButtons": false, "contain": true, "groupCells": true }'>
                     <div class="home-page-section-restaurant" th:each="restaurant :${restaurants}">
