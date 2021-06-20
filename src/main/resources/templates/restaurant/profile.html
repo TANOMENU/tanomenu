@@ -39,7 +39,7 @@
             </main>
             <div class="profile">
                 <div class="image-profile">
-                    <img id="img-profile" th:src="'/upload/' + ${restaurant.getImage()}">
+                    <img id="img-profile" th:src="'/upload/' + ${restaurant.getImage()}" onerror="this.src='/img/user-icon.png'">
 
                     <a th:href="@{/restaurant/profile/edit/{uuid} (uuid=${restaurant.getUuid()})}"><img class="icon" src="/img/icons/Pencil.svg"></a>
                 </div>
