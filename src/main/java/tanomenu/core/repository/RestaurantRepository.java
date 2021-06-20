@@ -7,6 +7,7 @@ import tanomenu.core.entity.Restaurant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,8 +26,11 @@ public class RestaurantRepository extends Repository<Restaurant> {
     }
 
     public List<Restaurant> findByName(String name){
+        Predicate<Restaurant> isCompanyName = r -> r.getCompanyName().equalsIgnoreCase(name);
+        Predicate<Restaurant> isTradeName = r -> r.getTradeName().equalsIgnoreCase(name);
+        Predicate<Restaurant> isCategory = r -> r.getCategory().getValue().equalsIgnoreCase(name);
         return getStream()
-                .filter(r -> r.getCompanyName().equals(name))
+                .filter(isCompanyName.or(isTradeName).or(isCategory))
                 .collect(Collectors.toList());
     }
 }
