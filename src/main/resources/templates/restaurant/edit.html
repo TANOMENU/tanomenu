@@ -10,7 +10,7 @@
         <div class="home-page-main">
             <div class="image-profile register-restaurant">
                 <form class="main-container" th:action="@{/restaurant/profile/edit/{uuid} (uuid=${restaurant.getUuid()})}" th:object="${restaurant}" enctype="multipart/form-data" method="post">
-                    <img id="img-profile" th:src="'/upload/' + ${restaurant.getImage()}">
+                    <img id="img-profile" th:src="'/upload/' + ${restaurant.getImage()}" onerror="this.src='/img/user-icon.png'">
 
                     <div class="fieldsets-container" style="display: flex;">
                         <fieldset style="margin: 20px; border: 0;">
