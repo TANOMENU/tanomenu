@@ -22,9 +22,13 @@ public class Product implements Serializable {
     @NotNull
     private BigDecimal price;
 
+    @NotNull
+    private CategoryProduct category;
+
     @NotBlank
     private String description;
 
     private String image;
+
 
 }

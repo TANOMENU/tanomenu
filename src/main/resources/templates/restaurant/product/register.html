@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+  <th:block th:replace="common :: myHead" />
+  <link href="/css/restaurant/register.css" rel="stylesheet">
+  <title>Cadastrar Produto</title>
+</head>
+<body class="base base-background-color">
+<th:block th:replace="common :: myHeader" />
+
+<main class="register-restaurant">
+  <h1 class="page-title">Cadastrar Produto</h1>
+
+  <form method="post" th:action="@{/restaurant/product/register}" th:object="${productRegisterDto}" enctype="multipart/form-data">
+    <div class="fieldsets-container">
+      <fieldset>
+        <label class="field">
+          Tipo de Prato
+          <select th:field="*{category}">
+            <option th:each="stateOpt : ${T(tanomenu.core.entity.restaurant.CategoryProduct).values()}"
+                    th:value="${stateOpt}" th:text="${stateOpt.getValue()}"></option>
+          </select>
+          <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
+        </label>
+
+        <label class="field">
+          Nome
+          <input type="text" th:field="*{name}"/>
+          <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        </label>
+
+        <label class="field">
+          Ingredientes
+          <input type="text" th:field="*{description}"/>
+          <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+        </label>
+
+        <label class="field">
+          Preço
+          <input type="text" th:field="*{price}"/>
+          <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+        </label>
+
+        <label class="field">
+          Foto
+          <input type="file" th:field="*{image}"/>
+          <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+        </label>
+      </fieldset>
+    </div>
+    <button type="submit" class="button submit">Continuar</button>
+  </form>
+</main>
+
+</body>
+</html>
