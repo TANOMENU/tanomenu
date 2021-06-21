@@ -15,3 +15,8 @@
     display: grid;
     grid-auto-rows: auto;
 }
+
+h3 {
+    text-align: center;
+    color: #e72222;
+}

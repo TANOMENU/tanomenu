@@ -12,13 +12,6 @@
             <h1 class="page-title">Fazer Login</h1>
 
             <form action="#" th:action="@{/login}" th:object="${userLoginDto}" method="post">
-                <h3 th:if="${param.error}" class="alert alert-error">
-                    Nome de usuário e senha inválidos
-                </h3>
-                <h3 th:if="${param.logout}" class="alert alert-success">
-                    Você foi desconectado
-                </h3>
-
                 <label class="field">
                     Email
                     <input type="email" th:field="*{email}"/>
@@ -33,6 +26,12 @@
             </form>
 
             <a href="sign-up" class="link">Ainda não tem uma conta?</a>
+            <h3 th:if="${param.error}" class="alert alert-error">
+                Nome de usuário e senha inválidos
+            </h3>
+            <h3 th:if="${param.logout}" class="alert alert-success">
+                Você foi desconectado
+            </h3>
         </main>
 
         <th:block th:replace="common :: myFooter" />

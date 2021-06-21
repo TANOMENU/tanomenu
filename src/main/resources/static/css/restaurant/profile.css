@@ -90,10 +90,10 @@ header {
 }
 
 form {
-    margin-top: 30px;
     width: 600px;
     display: flex;
     flex-direction: column;
+    margin-bottom: 150px;
 }
 
 form a {
