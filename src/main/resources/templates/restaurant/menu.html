@@ -18,7 +18,7 @@
                 <div th:if="${gallery}" class="gallery js-flickity" data-flickity='{ "wrapAround": true, "contain": true }'>
                     <div class="gallery-cell"
                          th:each="product :${gallery}"
-                         th:style="'background-image: url(' + ${product.image} + ')'"
+                         th:style="'background-image: url(/upload/' + ${product.image} + ')'"
                          th:title="${product.description}"
                     >
                         <h2 th:text="${product.name}"></h2>
@@ -28,8 +28,9 @@
             </section>
 
             <section class="restaurant-menu-main-content">
-                <ul th:each="entry, stat :${restaurant.getMenu()}">
-                    <h2 th:text="${entry.key.toUpperCase()}">Seção do Menu</h2>
+                <!--/*@thymesVar id="menu" type="java.util.Map<tanomenu.core.entity.restaurant.CategoryProduct, java.util.List<tanomenu.core.entity.restaurant.Product>"*/-->
+                <ul th:each="entry, stat :${menu}">
+                    <h2 th:text="${entry.key.toString().toUpperCase()}">Seção do Menu</h2>
                     <li th:each="product :${entry.value}">
                         <h3><span th:text="${product.name}">Nome do produto</span> R$ <th:block th:text="${product.price}" /></h3>
                         <p th:text="${product.description}">Descrição dos ingredientes, preparos, receita, etc.</p>

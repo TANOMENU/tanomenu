@@ -15,7 +15,7 @@
                 <div class="home-page-section-restaurants js-flickity"
                      data-flickity='{ "cellAlign": "left", "freeScroll": true, "prevNextButtons": false, "contain": true, "groupCells": true }'>
                     <div class="home-page-section-restaurant" th:each="restaurant :${restaurants}">
-                        <a th:href="@{/restaurant/profile/{uuid}(uuid=${restaurant.uuid})}"
+                        <a th:href="@{/restaurant/{uuid}(uuid=${restaurant.uuid})}"
                            th:title="${restaurant.tradeName}"
                            th:style="'background-image: url(/upload/' + ${restaurant.image} + ')'">
                             <h4 th:text="${restaurant.tradeName}"></h4>

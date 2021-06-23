@@ -130,7 +130,11 @@ body.base.base-background-color {
 body.base > header.base-header {
     padding: 10px 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr auto 1fr;
+}
+
+body.base > header.base-header > a.base-logo {
+    width: fit-content;
 }
 
 body.base > header.base-header > a.base-logo > img {

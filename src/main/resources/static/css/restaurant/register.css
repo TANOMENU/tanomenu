@@ -9,10 +9,15 @@
     margin-bottom: 20px;
 }
 
+main {
+    margin-top: 250px;
+}
+
 .register-restaurant form {
     display: flex;
     flex-direction: column;
     width: 750px;
+    align-items: center;
 }
 
 .register-restaurant form .fieldsets-container {
@@ -24,8 +29,4 @@
 .register-restaurant form .fieldsets-container > fieldset {
     width: 350px;
     border: none;
-}
-
-.register-restaurant form .button {
-    margin-left: auto;
 }

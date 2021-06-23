@@ -1,21 +1,15 @@
-package tanomenu.core.entity.restaurant;
+package tanomenu.web.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
+import tanomenu.core.entity.restaurant.CategoryProduct;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class Product implements Serializable {
+public class ProductDto {
 
     @NotBlank
     private String name;
@@ -29,7 +23,5 @@ public class Product implements Serializable {
     @NotBlank
     private String description;
 
-    private UUID image;
-
-
+    private MultipartFile image;
 }
