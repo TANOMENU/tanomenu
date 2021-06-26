@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
         <th:block th:replace="_layout/common :: myHead" />
-        <title>Configurações</title>
+        <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Configurações</title>
         <link href="/css/settings.css" rel="stylesheet">
     </head>
     <body class="base base-background-color">
         <th:block th:replace="_layout/common :: myHeader" />
+
         <main class="settings-page">
-            <nav class="settings-page-left">
+            <nav class="settings-page-left"
+                 th:with="user=${@userRepository.find(#authentication.principal.getUUID()).get()}">
                 <h3>Configurações</h3>
 
                 <ul>
-                    <span>Perfil pessoal</span>
+                    <span>Perfil</span>
                     <li>
                         <a th:href="@{/profile}">
                             <span class="material-icons">face</span> <th:block th:text="${user.name}" />
@@ -20,21 +22,20 @@
                     </li>
                 </ul>
 
-                <ul>
-                    <span>Suas páginas</span>
+                <ul th:with="restaurants=${@restaurantRepository.findByOwner(user.uuid)}">
+                    <span>Estabelecimentos</span>
                     <li th:each="restaurant: ${restaurants}">
-                        <a th:href="@{/restaurant/profile/edit/{uuid} (uuid=${restaurant.uuid})}">
+                        <a th:href="@{/restaurant/{uuid}/settings (uuid=${restaurant.uuid})}">
                             <span class="material-icons">store</span> <th:block th:text="${restaurant.tradeName}" />
                         </a>
                     </li>
                 </ul>
             </nav>
 
-            <div class="settings-page-right">
+            <div layout:fragment="content" class="settings-page-right">
 
             </div>
-
-
         </main>
+
     </body>
 </html>

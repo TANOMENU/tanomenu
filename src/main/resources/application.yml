@@ -7,3 +7,5 @@ spring:
         cachecontrol:
           cache-public: true
           max-age: 86400
+    locale-resolver: fixed
+    locale: pt_BR

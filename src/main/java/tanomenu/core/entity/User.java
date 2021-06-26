@@ -35,6 +35,7 @@ public class User implements Entity<User> {
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.cpf = user.getCpf();
+        this.image = user.getImage();
     }
 
 }

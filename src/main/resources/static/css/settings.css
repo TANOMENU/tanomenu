@@ -46,7 +46,40 @@
 .settings-page-left ul li a:hover {
     background-color: var(--gray-dark);
 }
+
 .settings-page-right {
     height: 100%;
-    overflow-y: auto;
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.settings-page-right form {
+    display: flex;
+    flex-direction: column;
+    width: 750px;
+}
+
+.settings-page-right form img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    place-self: center;
+    border-radius: 50%;
+}
+
+.settings-page-right form .fieldsets-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.settings-page-right form .fieldsets-container > fieldset {
+    width: 350px;
+    border: none;
+}
+
+.settings-page-right form .button {
+    margin-left: auto;
 }

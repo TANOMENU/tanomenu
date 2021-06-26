@@ -3,13 +3,13 @@
 <!--/*@thymesVar id="restaurant" type="tanomenu.core.entity.Restaurant"*/-->
 <!--/*@thymesVar id="gallery" type="List<tanomenu.core.entity.restaurant.Product>"*/-->
     <head>
-        <th:block th:replace="common :: myHead" />
+        <th:block th:replace="_layout/common :: myHead" />
         <title th:text="${restaurant.getTradeName()}">Nome do Restaurante</title>
-        <th:block th:replace="common :: flickityMeta" />
+        <th:block th:replace="_layout/common :: flickityMeta" />
         <link href="/css/restaurant/menu.css" rel="stylesheet">
     </head>
     <body class="base base-background-image base-background-image-50">
-        <th:block th:replace="common :: myHeader" />
+        <th:block th:replace="_layout/common :: myHeader" />
 
         <main class="restaurant-menu-main">
             <section class="restaurant-menu-main-top">
@@ -39,7 +39,7 @@
                 </ul>
 
                 <th:block th:unless="${restaurant.getMenu()}">
-                    <th:block th:replace="common :: ooops('Não encontramos nada para mostrar')" />
+                    <th:block th:replace="_layout/common :: ooops('Não encontramos nada para mostrar')" />
                 </th:block>
             </section>
         </main>
