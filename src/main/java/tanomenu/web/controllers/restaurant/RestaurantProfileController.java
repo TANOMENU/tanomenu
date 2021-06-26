@@ -59,12 +59,15 @@ public class RestaurantProfileController {
     @GetMapping("/edit/{uuid}")
     public String edit(@AuthenticationPrincipal AuthUserDetails userDetails, Model model, @PathVariable UUID uuid) {
         Optional<Restaurant> restaurant = restaurantRepository.find(uuid);
-
+        var user = userRepository.find(userDetails.getUUID());
+        var restaurants = restaurantRepository.findByOwner(userDetails.getUUID());
         return restaurant.map(r -> {
-            if(!r.getUserUuid().equals(userDetails.getUUID())) {
+            if(!r.getUserUuid().equals(user.get().getUuid())) {
                 return "redirect:/";
             }
             model.addAttribute("restaurant", r);
+            model.addAttribute("user", user.get());
+            model.addAttribute("restaurants", restaurants);
             return "restaurant/edit";
         }).orElse(
                 "redirect:/"
@@ -87,7 +90,7 @@ public class RestaurantProfileController {
             }
             restaurantRepository.update(uuid, restaurant.get());
             model.addAttribute("restaurant", restaurant);
-            return "redirect:/restaurant/profile/" + r.getUuid();
+            return "redirect:/restaurant/profile/edit/" + r.getUuid();
         }).orElse(
                 "redirect:/"
         );

@@ -13,6 +13,7 @@ public enum Category {
     FastFood("Fast Food"),
     Steakhouse("Churrascarias"),
     VeganAndVegetarians("Veganos e Vegetarianos"),
+    Pizzeria("Pizzaria"),
     Other("Outros");
 
     private final String value;

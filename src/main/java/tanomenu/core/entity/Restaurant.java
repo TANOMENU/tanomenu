@@ -7,6 +7,7 @@ import tanomenu.core.entity.restaurant.Category;
 import tanomenu.core.entity.restaurant.Product;
 import tanomenu.core.entity.restaurant.Address;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -35,7 +36,7 @@ public class Restaurant implements Entity<Restaurant> {
 
     private Category category;
 
-    private Map<String, List<Product>> menu;
+    private List<Product> menu;
 
     @Override
     public void update(Restaurant restaurant) {
@@ -44,6 +45,7 @@ public class Restaurant implements Entity<Restaurant> {
         this.cnpj = restaurant.getCnpj();
         this.address = restaurant.getAddress();
         this.image = restaurant.getImage();
+        this.menu = restaurant.getMenu();
     }
 
     @SneakyThrows

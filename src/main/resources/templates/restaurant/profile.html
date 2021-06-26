@@ -57,14 +57,14 @@
                         <img src="/img/icons/chevron-right.svg" class="arrow">
                     </a>
 
-                    <a href="#">
+                    <a th:href="@{/restaurant/profile/edit/{uuid} (uuid=${restaurant.getUuid()})}" data-bs-toggle="modal" data-bs-target="#security-modal">
                         <img src="/img/icons/map-pin.svg" class="a-icon">
                         <h2>Localização</h2>
                         <p>Altere a localização de seu restaurante</p>
                         <img src="/img/icons/chevron-right.svg" class="arrow">
                     </a>
 
-                    <a href="#">
+                    <a th:href="@{/profile}">
                         <img src="/img/icons/alert-circle.svg" class="a-icon">
                         <h2>Segurança</h2>
                         <p>altere as opções de segurança de sua conta</p>

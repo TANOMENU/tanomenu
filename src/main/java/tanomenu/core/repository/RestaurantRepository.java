@@ -5,6 +5,7 @@ import tanomenu.core.Repository;
 import tanomenu.core.entity.Restaurant;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
@@ -26,11 +27,15 @@ public class RestaurantRepository extends Repository<Restaurant> {
     }
 
     public List<Restaurant> findByName(String name){
-        Predicate<Restaurant> isCompanyName = r -> r.getCompanyName().equalsIgnoreCase(name);
-        Predicate<Restaurant> isTradeName = r -> r.getTradeName().equalsIgnoreCase(name);
-        Predicate<Restaurant> isCategory = r -> r.getCategory().getValue().equalsIgnoreCase(name);
+        Predicate<Restaurant> isCompanyName = r -> containsIgnoreCase(r.getCompanyName(), name);
+        Predicate<Restaurant> isTradeName = r -> containsIgnoreCase(r.getTradeName(), name);
+        Predicate<Restaurant> isCategory = r -> containsIgnoreCase(r.getCategory().getValue(), name);
         return getStream()
                 .filter(isCompanyName.or(isTradeName).or(isCategory))
                 .collect(Collectors.toList());
+    }
+
+    private boolean containsIgnoreCase(String target, String term) {
+        return  target.toLowerCase().contains(term.toLowerCase());
     }
 }

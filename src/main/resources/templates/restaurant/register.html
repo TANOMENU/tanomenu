@@ -6,14 +6,14 @@
         <title>Cadastrar Restaurante</title>
     </head>
     <body class="base base-background-color">
-        <th:block th:replace="common :: myHeader" />
+        <th:block th:replace="common :: myHeader"/>
 
         <main class="register-restaurant">
             <h1 class="page-title">Cadastrar Restaurante</h1>
 
             <form method="post" th:action="@{/restaurant/register}" th:object="${restaurantRegisterDto}" enctype="multipart/form-data">
-                <div class="fieldsets-container">
-                    <fieldset>
+                <div class="fieldsets-container" >
+                    <fieldset style="margin-right: 30px;">
                         <label class="field">
                             Nome Fantasia
                             <input type="text" th:field="*{tradeName}"/>

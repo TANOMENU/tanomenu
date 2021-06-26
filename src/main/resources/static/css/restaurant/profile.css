@@ -40,7 +40,8 @@ header {
     width: auto;
     height: auto;
     justify-content: center;
-    margin-top: 150px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .image-profile #img-profile {
