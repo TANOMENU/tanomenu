@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{_layout/settings}"
+      lang="pt">
+    <head>
+        <title th:text="${user.name}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+
+            <form th:method="post" th:action="@{/profile}" th:object="${userEditDto}" enctype="multipart/form-data">
+                <img th:src="${user.image} ? @{/upload/{uuid} (uuid=${user.image})} : @{/img/user-icon.png}">
+
+                <div class="fieldsets-container">
+                    <fieldset>
+                        <label class="field">
+                            Nome
+                            <input type="text" th:field="*{name}"/>
+                            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                        </label>
+                        <label class="field">
+                            Email
+                            <input type="email" th:field="*{email}"/>
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                        </label>
+                        <label class="field">
+                            CPF
+                            <input type="text" th:field="*{cpf}"/>
+                            <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
+                        </label>
+                    </fieldset>
+
+                    <fieldset>
+                        <label class="field">
+                            Foto
+                            <input type="file" th:field="*{image}"/>
+                            <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+                        </label>
+
+                        <label class="field">
+                            Nova senha
+                            <input type="password" th:field="*{password}"/>
+                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                        </label>
+
+                        <label class="field">
+                            Confirmar senha atual *
+                            <input type="password" th:field="*{confirmPassword}"/>
+                            <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
+                        </label>
+                    </fieldset>
+                </div>
+                <button type="submit" class="button">Continuar</button>
+            </form>
+
+            <script>
+                (() => {
+                    function preview_image(event) {
+                        const img = document.querySelector('.settings-page-right form img');
+                        const reader = new FileReader();
+                        reader.onload = () => img.src = reader.result;
+                        reader.readAsDataURL(event.target.files[0]);
+                    }
+
+                    const input = document.querySelector('.settings-page-right form input[type="file"]');
+                    input.onchange = preview_image
+                })()
+            </script>
+
+        </div>
+    </body>
+</html>

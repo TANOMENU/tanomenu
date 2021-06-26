@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
     <head>
-        <th:block th:replace="common :: myHead" />
+        <th:block th:replace="_layout/common :: myHead" />
         <title>Página inicial</title>
-        <th:block th:replace="common :: flickityMeta" />
+        <th:block th:replace="_layout/common :: flickityMeta" />
         <link href="/css/home.css" rel="stylesheet">
     </head>
     <body class="base base-background-color">
-        <th:block th:replace="common :: myHeader" />
+        <th:block th:replace="_layout/common :: myHeader" />
 
         <main class="home-page-main">
             <!--/*@thymesVar id="restaurantsByCategories" type="java.util.Map<java.lang.String, java.util.List<tanomenu.core.entity.Restaurant>>"*/-->
@@ -31,7 +31,7 @@
             </section>
 
             <th:block th:if="${restaurantsByCategories.isEmpty()}">
-                <th:block th:replace="common :: ooops('Nenhum restaurante disponível!')" />
+                <th:block th:replace="_layout/common :: ooops('Nenhum restaurante disponível!')" />
             </th:block>
         </main>
 

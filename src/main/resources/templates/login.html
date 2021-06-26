@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
     <head>
-        <th:block th:replace="common :: myHead" />
+        <th:block th:replace="_layout/common :: myHead" />
         <link href="/css/login-signup.css" rel="stylesheet">
         <title>Fazer Login</title>
     </head>
     <body class="base base-background-image">
-        <th:block th:replace="common :: myHeader" />
+        <th:block th:replace="_layout/common :: myHeader" />
 
         <main class="login-signup">
             <h1 class="page-title">Fazer Login</h1>
@@ -34,6 +34,6 @@
             </h3>
         </main>
 
-        <th:block th:replace="common :: myFooter" />
+        <th:block th:replace="_layout/common :: myFooter" />
     </body>
 </html>
