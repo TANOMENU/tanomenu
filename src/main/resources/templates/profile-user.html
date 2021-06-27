@@ -13,19 +13,19 @@
 
                 <div class="fieldsets-container">
                     <fieldset>
-                        <label class="field">
+                        <label class="field" th:for="*{name}">
                             Nome
-                            <input type="text" th:field="*{name}"/>
+                            <input type="text" th:field="*{name}" th:required="Boolean" th:name="*{name}"/>
                             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                         </label>
-                        <label class="field">
+                        <label class="field" th:for="*{email}">
                             Email
-                            <input type="email" th:field="*{email}"/>
+                            <input type="email" th:field="*{email}" th:required="Boolean" th:name="*{email}"/>
                             <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                         </label>
-                        <label class="field">
+                        <label class="field" th:for="*{cpf}">
                             CPF
-                            <input type="text" th:field="*{cpf}"/>
+                            <input type="text" th:field="*{cpf}" th:required="Boolean" th:name="*{cpf}"/>
                             <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
                         </label>
                     </fieldset>
@@ -43,9 +43,9 @@
                             <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
                         </label>
 
-                        <label class="field">
+                        <label class="field" th:for="*{confirmPassword}">
                             Confirmar senha atual *
-                            <input type="password" th:field="*{confirmPassword}"/>
+                            <input type="password" th:field="*{confirmPassword}" th:required="Boolean" th:name="*{confirmPassword}"/>
                             <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
                         </label>
                     </fieldset>

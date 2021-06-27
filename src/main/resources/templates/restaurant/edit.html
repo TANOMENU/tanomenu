@@ -7,34 +7,34 @@
         <title>Edit</title>
     </head>
 
-    <body class="base base-background-color">
-        <div layout:fragment="content">
+    <body class="base base-background-color" style="height: auto;">
+        <div layout:fragment="content" style="padding-top: 0;">
             <div class="home-page-main main-container">
                 <div class="image-profile register-restaurant">
                     <!--/*@thymesVar id="restaurant" type="tanomenu.core.entity.Restaurant"*/-->
 
                     <form class="main-container" th:action="@{/restaurant/profile/edit/{uuid} (uuid=${restaurant.getUuid()})}" th:object="${restaurant}" enctype="multipart/form-data" method="post">
                         <img id="img-profile" th:src="'/upload/' + ${restaurant.getImage()}" onerror="this.src='/img/user-icon.png'">
-                        <div class="fieldsets-container" style="display: flex;">
-                            <fieldset style="margin: 20px; border: 0;">
-                                <label class="field">
+                        <div class="fieldsets-container" >
+                            <fieldset style="margin-right: 30px;">
+                                <label class="field" th:for="*{tradeName}">
                                     Nome Fantasia
-                                    <input type="text" th:field="*{tradeName}"/>
+                                    <input type="text" th:field="*{tradeName}" th:required="Boolean" th:name="*{tradeName}"/>
                                     <span th:if="${#fields.hasErrors('tradeName')}" th:errors="*{tradeName}"></span>
                                 </label>
-                                <label class="field">
+                                <label class="field" th:for="*{companyName}">
                                     Razão social
-                                    <input type="text" th:field="*{companyName}"/>
+                                    <input type="text" id="companyName" th:field="*{companyName}" th:required="Boolean" th:name="*{companyName}"/>
                                     <span th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}"></span>
                                 </label>
-                                <label class="field">
+                                <label class="field" th:for="*{cnpj}">
                                     CNPJ
-                                    <input type="text" th:field="*{cnpj}"/>
+                                    <input type="text" th:field="*{cnpj}" th:required="Boolean" th:name="*{cnpj}"/>
                                     <span th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}"></span>
                                 </label>
-                                <label class="field">
+                                <label class="field" th:for="*{phone}">
                                     Telefone
-                                    <input type="text" th:field="*{phone}"/>
+                                    <input type="text" th:field="*{phone}" th:required="Boolean" th:name="*{phone}"/>
                                     <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
                                 </label>
                                 <label class="field">
@@ -47,34 +47,33 @@
                                 </label>
                                 <label class="field">
                                     Foto
-                                    <input class="input-image" type="file" th:field="*{image}"/>
+                                    <input type="file" th:field="*{image}"/>
                                     <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
                                 </label>
                             </fieldset>
 
-                            <fieldset style="margin: 20px; border: 0;">
-                                <label class="field">
+                            <fieldset>
+                                <label class="field" th:for="*{address.area}">
                                     Logradouro
-                                    <input type="text" th:field="*{address.area}"/>
+                                    <input type="text" th:field="*{address.area}" th:required="Boolean" th:name="*{address.area}"/>
                                     <span th:if="${#fields.hasErrors('address.area')}" th:errors="*{address.area}"></span>
                                 </label>
-                                <label class="field">
+                                <label class="field" th:for="*{address.postalCode}">
                                     CEP
-                                    <input type="text" th:field="*{address.postalCode}"/>
-
+                                    <input type="text" th:field="*{address.postalCode}" th:required="Boolean" th:name="*{address.postalCode}"/>
                                     <span th:if="${#fields.hasErrors('address.postalCode')}" th:errors="*{address.postalCode}"></span>
                                 </label>
-                                <label class="field">
+                                <label class="field" th:for="*{address.neighborhood}">
                                     Bairro
-                                    <input type="text" th:field="*{address.neighborhood}"/>
+                                    <input type="text" th:field="*{address.neighborhood}" th:required="Boolean" th:name="*{address.neighborhood}"/>
                                     <span th:if="${#fields.hasErrors('address.neighborhood')}" th:errors="*{address.neighborhood}"></span>
                                 </label>
-                                <label class="field">
+                                <label class="field" th:for="*{address.city}">
                                     Cidade
-                                    <input type="text" th:field="*{address.city}"/>
+                                    <input type="text" th:field="*{address.city}" th:required="Boolean" th:name="*{address.city}"/>
                                     <span th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"></span>
                                 </label>
-                                <label class="field">
+                                <label class="field" th:for="*{address.state}">
                                     Estado
                                     <select th:field="*{address.state}">
                                         <option th:each="stateOpt : ${T(tanomenu.core.entity.restaurant.address.State).values()}"
@@ -84,8 +83,7 @@
                                 </label>
                             </fieldset>
                         </div>
-
-                        <button class="button submit" type="submit">Salvar</button>
+                        <button type="submit" class="button submit">Salvar</button>
                     </form>
                     <script>
                         (() => {
