@@ -46,8 +46,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
           script: |
-            sudo systemctl stop tanomenu.service 
-            sudo systemctl daemon-reload
-            sudo systemctl start tanomenu.service 
+            systemctl stop tanomenu.service 
+            systemctl start tanomenu.service 
+
           
      
