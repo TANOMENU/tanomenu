@@ -1,12 +1,7 @@
 package tanomenu.core.entity.restaurant;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import lombok.*;
+import tanomenu.core.Entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -15,22 +10,34 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Product implements Serializable {
+public class Product implements Serializable, Entity<Product> {
 
-    @NotBlank
+    private UUID uuid;
+
+    private UUID restaurantUuid;
+
     private String name;
 
-    @NotNull
     private BigDecimal price;
 
-    @NotNull
     private CategoryProduct category;
 
-    @NotBlank
     private String description;
 
     private UUID image;
 
+    @SneakyThrows
+    @Override
+    public Product clone() {
+        return (Product) super.clone();
+    }
 
-
+    @Override
+    public void update(Product product) {
+        this.name = product.name;
+        this.price = product.price;
+        this.category = product.category;
+        this.description = product.description;
+        this.image = product.image;
+    }
 }

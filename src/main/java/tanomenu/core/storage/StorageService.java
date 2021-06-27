@@ -36,6 +36,7 @@ public class StorageService {
     }
 
     public UUID save(MultipartFile file) {
+        Objects.requireNonNull(file);
         var uuid =  UUID.randomUUID();
         try {
             file.transferTo(fileOf(uuid));
@@ -46,6 +47,7 @@ public class StorageService {
     }
 
     public Optional<byte[]> find(UUID uuid) {
+        Objects.requireNonNull(uuid);
         try(var fis = new FileInputStream(fileOf(uuid))) {
             return Optional.of(fis.readAllBytes());
         }
@@ -58,6 +60,8 @@ public class StorageService {
     }
 
     public UUID update(UUID uuid, MultipartFile multipartFile) {
+        Objects.requireNonNull(uuid);
+        Objects.requireNonNull(multipartFile);
         if(!delete(uuid)) {
             throw new RepositoryException();
         }
@@ -65,6 +69,7 @@ public class StorageService {
     }
 
     public boolean delete(UUID uuid) {
+        Objects.requireNonNull(uuid);
         var file = fileOf(uuid);
         try {
             return file.exists() && file.delete();
@@ -72,5 +77,4 @@ public class StorageService {
             throw new StorageException(e);
         }
     }
-
 }

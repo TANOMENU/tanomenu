@@ -2,8 +2,6 @@ package tanomenu.core.entity;
 
 import lombok.*;
 import tanomenu.core.Entity;
-
-import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
 @Data

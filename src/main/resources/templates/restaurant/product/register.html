@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
   <head>
-    <th:block th:replace="common :: myHead" />
+    <th:block th:replace="_layout/common :: myHead" />
     <link href="/css/restaurant/register.css" rel="stylesheet">
     <title>Cadastrar Produto</title>
   </head>
     <body class="base base-background-color">
-    <th:block th:replace="common :: myHeader" />
+    <th:block th:replace="_layout/common :: myHeader" />
 
     <main class="register-restaurant">
       <h1 class="page-title">Cadastrar Produto</h1>
 
       <!--/*@thymesVar id="restaurant" type="tanomenu.core.entity.Restaurant"*/-->
-      <!--/ TODO criar o productRegisterDto /-->
       <!--/*@thymesVar id="productDto" type="tanomenu.web.dto.ProductDto"*/-->
-      <form method="post" th:action="@{/restaurant/{uuid}/register (uuid=${restaurant.uuid})}" th:object="${productDto}" enctype="multipart/form-data">
+      <!--/*@thymesVar id="url" type="java.lang.String"*/-->
+
+      <form method="post" th:action="@{${url}}" th:object="${productDto}" enctype="multipart/form-data">
+        <!--/*@thymesVar id="image" type="java.util.UUID"*/-->
+        <img th:src="${image} ? @{/upload/{uuid} (uuid=${image})} : @{/img/user-icon.png}" style="width: 150px; height: 150px; border-radius: 50%">
         <div class="fieldsets-container">
           <fieldset>
+            <input type="hidden" th:field="*{uuid}">
+            <input type="hidden" th:if="*{restaurantUuid}">
+
             <label class="field">
               Tipo de Prato
               <select th:field="*{category}">
@@ -40,7 +46,7 @@
 
             <label class="field">
               Preço
-              <input type="number" th:field="*{price}"/>
+              <input type="number" step="0.01" min="0.0" th:field="*{price}"/>
               <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
             </label>
 
@@ -54,6 +60,18 @@
         <button type="submit" class="button submit">Continuar</button>
       </form>
     </main>
+    <script>
+      (() => {
+        function preview_image(event) {
+          const img = document.querySelector('.register-restaurant form img');
+          const reader = new FileReader();
+          reader.onload = () => img.src = reader.result;
+          reader.readAsDataURL(event.target.files[0]);
+        }
 
+        const input = document.querySelector('.register-restaurant form input[type="file"]');
+        input.onchange = preview_image
+      })()
+    </script>
   </body>
 </html>

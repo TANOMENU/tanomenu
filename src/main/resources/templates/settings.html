@@ -15,13 +15,15 @@
                     <span>Perfil pessoal</span>
                     <li>
                         <a th:href="@{/profile}">
-                            <span class="material-icons">face</span> <th:block th:text="${user.name}" />
+                            <span class="material-icons">face</span> <!--/*@thymesVar id="user" type="tanomenu.core.entity.User"*/-->
+                            <th:block th:text="${user.name}" />
                         </a>
                     </li>
                 </ul>
 
                 <ul>
                     <span>Suas páginas</span>
+                    <!--/*@thymesVar id="restaurants" type="java.util.List<tanomenu.core.entity.Restaurant>"*/-->
                     <li th:each="restaurant: ${restaurants}">
                         <a th:href="@{/restaurant/profile/edit/{uuid} (uuid=${restaurant.uuid})}">
                             <span class="material-icons">store</span> <th:block th:text="${restaurant.tradeName}" />

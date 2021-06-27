@@ -7,9 +7,16 @@ import tanomenu.core.entity.restaurant.CategoryProduct;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 public class ProductDto {
+
+    @NotBlank
+    private UUID uuid;
+
+    @NotBlank
+    private UUID restaurantUuid;
 
     @NotBlank
     private String name;

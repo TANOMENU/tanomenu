@@ -9,10 +9,6 @@
     margin-bottom: 20px;
 }
 
-main {
-    margin-top: 250px;
-}
-
 .register-restaurant form {
     display: flex;
     flex-direction: column;
