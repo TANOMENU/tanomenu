@@ -32,10 +32,13 @@
                 <!--/*@thymesVar id="validate" type="java.lang.Boolean"*/-->
                 <a th:if="${validate}" th:href="@{/restaurant/{uuid}/register/ (uuid=${restaurant.uuid})}" style="text-decoration: none; color: black;">+ Criar Prato</a>
                 <ul th:each="entry, stat :${menu}">
-                    <h2 th:text="${entry.key.toString().toUpperCase()}">Seção do Menu</h2>
+                    <h2 th:text="${entry.key.getValue().toUpperCase()}">Seção do Menu</h2>
                     <li th:each="product :${entry.value}">
                         <h3><span th:text="${product.name}">Nome do produto</span> R$ <th:block th:text="${product.price}" /></h3>
-                        <p th:text="${product.description}">Descrição dos ingredientes, preparos, receita, etc.</p>
+                        <div style="display: flex;">
+                            <p th:text="${product.description}">Descrição dos ingredientes, preparos, receita, etc.</p>
+                            <a th:if="${validate}" th:href="@{/restaurant/{uuidR}/edit/{uuidP} (uuidR=${restaurant.uuid}, uuidP=${product.uuid}) }" style="position: relative; margin-left: auto; top: -25px; right: -40px;"><img class="icon" src="/img/icons/Pencil.svg"></a>
+                        </div>
                     </li>
                 </ul>
 

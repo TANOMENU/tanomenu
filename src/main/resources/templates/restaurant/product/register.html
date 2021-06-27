@@ -8,12 +8,13 @@
     <body class="base base-background-color">
     <th:block th:replace="_layout/common :: myHeader" />
 
-    <main class="register-restaurant">
-      <h1 class="page-title">Cadastrar Produto</h1>
+    <!--/*@thymesVar id="restaurant" type="tanomenu.core.entity.Restaurant"*/-->
+    <!--/*@thymesVar id="productDto" type="tanomenu.web.dto.ProductDto"*/-->
+    <!--/*@thymesVar id="url" type="java.lang.String"*/-->
 
-      <!--/*@thymesVar id="restaurant" type="tanomenu.core.entity.Restaurant"*/-->
-      <!--/*@thymesVar id="productDto" type="tanomenu.web.dto.ProductDto"*/-->
-      <!--/*@thymesVar id="url" type="java.lang.String"*/-->
+    <main class="register-restaurant">
+      <h1 th:if="${productDto.getUuid() == null}" class="page-title">Cadastrar Produto</h1>
+      <h1 th:if="${productDto.getUuid() != null}" class="page-title">Editar Produto</h1>
 
       <form method="post" th:action="@{${url}}" th:object="${productDto}" enctype="multipart/form-data">
         <!--/*@thymesVar id="image" type="java.util.UUID"*/-->
