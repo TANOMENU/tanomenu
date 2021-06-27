@@ -42,12 +42,6 @@ public class RestaurantController {
             restaurant = Optional.empty();
         }
 
-        var products2 = productRepository.findByRestaurant(UUID.fromString(uuid));
-
-        for (Product product: products2) {
-            System.out.println(product.getUuid());
-        }
-
         return restaurant.map(r -> {
             model.addAttribute("restaurant", r);
 
