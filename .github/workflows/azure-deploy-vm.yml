@@ -46,8 +46,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
           script: |
-            echo "marins1234@." | sudo -S systemctl stop tanomenu.service 
-            echo "marins1234@." | sudo -S systemctl start tanomenu.service 
+            echo "${{ secrets.SERVER_USER_PASSWORD }}" | sudo -S systemctl stop tanomenu.service 
+            echo "${{ secrets.SERVER_USER_PASSWORD }}" | sudo -S systemctl start tanomenu.service 
 
           
      
