@@ -35,7 +35,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}      
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
-          source: '${{ github.workspace }}/build/libs/tanomenu-0.0.1-SNAPSHOT.jar'     
+          source: 'build/libs/tanomenu-0.0.1-SNAPSHOT.jar'     
           target: "~/source"
           
       - name: Start Service
@@ -47,9 +47,9 @@ jobs:
           port: 22
           script: |
             sudo /etc/init.d/tanomenu-0.0.1-SNAPSHOT stop
-            mv ~/source/tanomenu-0.0.1-SNAPSHOT.jar ~/source/my-app-old.jar
-            mv ~/source/my-app-latest.jar ~/source/tanomenu-0.0.1-SNAPSHOT.jar
+            mv ~/source/build/libs/tanomenu-0.0.1-SNAPSHOT.jar ~/source/my-app-old.jar
+            mv ~/source/my-app-latest.jar ~/source/build/libs/tanomenu-0.0.1-SNAPSHOT.jar
             sudo rm -rf /etc/init.d/tanomenu-0.0.1-SNAPSHOT
-            sudo ln -s -f ~/source/tanomenu-0.0.1-SNAPSHOT.jar /etc/init.d/tanomenu-0.0.1-SNAPSHOT
+            sudo ln -s -f ~/source/build/libs/tanomenu-0.0.1-SNAPSHOT.jar /etc/init.d/tanomenu-0.0.1-SNAPSHOT
             sudo /etc/init.d/tanomenu-0.0.1-SNAPSHOT start
             rm ~/source/my-app-old.jar
