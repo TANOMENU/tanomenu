@@ -13,9 +13,11 @@
 
       <!--/*@thymesVar id="restaurant" type="tanomenu.core.entity.Restaurant"*/-->
       <!--/*@thymesVar id="productDto" type="tanomenu.web.dto.ProductDto"*/-->
-      
       <!--/*@thymesVar id="url" type="java.lang.String"*/-->
+
       <form method="post" th:action="@{${url}}" th:object="${productDto}" enctype="multipart/form-data">
+        <!--/*@thymesVar id="image" type="java.util.UUID"*/-->
+        <img th:src="${image} ? @{/upload/{uuid} (uuid=${image})} : @{/img/user-icon.png}" style="width: 150px; height: 150px; border-radius: 50%">
         <div class="fieldsets-container">
           <fieldset>
             <input type="hidden" th:field="*{uuid}">
@@ -58,6 +60,18 @@
         <button type="submit" class="button submit">Continuar</button>
       </form>
     </main>
+    <script>
+      (() => {
+        function preview_image(event) {
+          const img = document.querySelector('.register-restaurant form img');
+          const reader = new FileReader();
+          reader.onload = () => img.src = reader.result;
+          reader.readAsDataURL(event.target.files[0]);
+        }
 
+        const input = document.querySelector('.register-restaurant form input[type="file"]');
+        input.onchange = preview_image
+      })()
+    </script>
   </body>
 </html>

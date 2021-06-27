@@ -3,7 +3,7 @@
     <head>
         <th:block th:replace="_layout/common :: myHead" />
         <title>Página inicial</title>
-        <th:block th:replace="_layout/common :: flickityMeta" />
+        <th:block th:replace="_layout/common :: flickityMetaCss" />
         <link href="/css/home.css" rel="stylesheet">
     </head>
     <body class="base base-background-color">
@@ -28,5 +28,7 @@
                 <th:block th:replace="_layout/common :: ooops('Nenhum restaurante disponível!')" />
             </th:block>
         </main>
+
+        <th:block th:replace="_layout/common :: flickityMetaJs" />
     </body>
 </html>

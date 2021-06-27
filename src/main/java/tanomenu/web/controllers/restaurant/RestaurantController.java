@@ -116,6 +116,7 @@ public class RestaurantController {
                 model.addAttribute("productDto", productDto);
                 model.addAttribute("restaurant", r);
                 model.addAttribute("url", "/restaurant/" + r.getUuid() + "/edit/" + productDto.getUuid());
+                model.addAttribute("image", product.get().getImage());
                 return "restaurant/product/register";
             }
             return "redirect:/";
@@ -128,8 +129,8 @@ public class RestaurantController {
 
         return restaurant.map(r -> {
             if(r.getUserUuid().equals(userDetails.getUUID())) {
-                var product = modelMapper.map(productDto, Product.class);
-                product.setRestaurantUuid(r.getUuid());
+                var product = productRepository.find(productDto.getUuid()).get();
+                modelMapper.map(productDto, product);
 
                 if (!productDto.getImage().isEmpty()) {
                     var image = (product.getImage() != null)
