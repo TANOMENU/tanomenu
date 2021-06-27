@@ -3,6 +3,7 @@ package tanomenu.core.repository;
 import org.springframework.stereotype.Service;
 import tanomenu.core.Repository;
 import tanomenu.core.entity.Restaurant;
+import tanomenu.core.entity.restaurant.Product;
 
 import java.util.List;
 import java.util.Locale;
@@ -34,6 +35,8 @@ public class RestaurantRepository extends Repository<Restaurant> {
                 .filter(isCompanyName.or(isTradeName).or(isCategory))
                 .collect(Collectors.toList());
     }
+
+
 
     private boolean containsIgnoreCase(String target, String term) {
         return  target.toLowerCase().contains(term.toLowerCase());

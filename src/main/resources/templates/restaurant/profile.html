@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{_layout/settings}">
     <head>
         <th:block th:replace="_layout/common :: myHead" />
         <link href="/css/restaurant/profile.css" rel="stylesheet">
@@ -9,6 +9,9 @@
     <body class="base base-background-color">
     <!--/*@thymesVar id="restaurant" type="tanomenu.core.entity.Restaurant"*/-->
     <!--/*@thymesVar id="user" type="tanomenu.core.entity.User"*/-->
+    <div layout:fragment="content" class="settings-page-right">
+
+
         <div class="main-container home-page-main">
             <main class="settings-page">
                 <nav class="settings-page-left">
@@ -78,5 +81,6 @@
                 </footer>
             </div>
         </div>
+    </div>
     </body>
 </html>

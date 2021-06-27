@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import tanomenu.config.AuthUserDetails;
 import tanomenu.core.entity.Restaurant;
 import tanomenu.core.entity.restaurant.Product;
+import tanomenu.core.repository.ProductRepository;
 import tanomenu.core.repository.RestaurantRepository;
 import tanomenu.core.storage.StorageService;
 import tanomenu.web.dto.ProductDto;
 import tanomenu.web.dto.RestaurantRegisterDto;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -24,15 +24,17 @@ public class RestaurantController {
     private final RestaurantRepository restaurantRepository;
     private final StorageService storageService;
     private final ModelMapper modelMapper;
+    private final ProductRepository productRepository;
 
-    public RestaurantController(RestaurantRepository restaurantRepository, StorageService storageService, ModelMapper modelMapper) {
+    public RestaurantController(RestaurantRepository restaurantRepository, StorageService storageService, ModelMapper modelMapper, ProductRepository productRepository) {
         this.restaurantRepository = restaurantRepository;
         this.storageService = storageService;
         this.modelMapper = modelMapper;
+        this.productRepository = productRepository;
     }
 
     @GetMapping("/{uuid}")
-    public String show(@PathVariable String uuid, Model model) {
+    public String show(@PathVariable String uuid, Model model, @AuthenticationPrincipal AuthUserDetails userDetails) {
         Optional<Restaurant> restaurant;
         try {
             restaurant = restaurantRepository.find(UUID.fromString(uuid));
@@ -40,18 +42,29 @@ public class RestaurantController {
             restaurant = Optional.empty();
         }
 
+        var products2 = productRepository.findByRestaurant(UUID.fromString(uuid));
+
+        for (Product product: products2) {
+            System.out.println(product.getUuid());
+        }
+
         return restaurant.map(r -> {
             model.addAttribute("restaurant", r);
 
-            var menu = r.getMenu().stream().collect(Collectors.groupingBy(Product::getCategory));
-            model.addAttribute("menu", menu);
+            var products = productRepository.findByRestaurant(r.getUuid());
+            var menu = products.stream()
+                    .collect(Collectors.groupingBy(Product::getCategory));
+            var productsWithImage = products.stream()
+                    .filter(p -> !Objects.isNull(p.getImage()))
+                    .collect(Collectors.toList());
 
-            if(r.getMenu() != null) {
-                model.addAttribute("gallery", r.getMenu()
-                        .stream()
-                        .filter(p -> p.getImage() != null)
-                        .collect(Collectors.toList())
-                );
+            model.addAttribute("menu", menu);
+            model.addAttribute("gallery", productsWithImage);
+
+            if(userDetails.getUUID().equals(r.getUserUuid())) {
+                model.addAttribute("validate", true);
+            } else {
+                model.addAttribute("validate", false);
             }
             return "restaurant/menu";
         }).orElse("redirect:/");
@@ -66,6 +79,7 @@ public class RestaurantController {
             if(r.getUserUuid().equals(userDetails.getUUID())) {
                 model.addAttribute("restaurant", r);
                 model.addAttribute("productDto", new ProductDto());
+                model.addAttribute("url", "/restaurant/" + r.getUuid() + "/register");
                 return "restaurant/product/register";
             }
             return "redirect:/";
@@ -73,7 +87,7 @@ public class RestaurantController {
     }
 
     @PostMapping("/{uuid}/register")
-    public String register(@PathVariable String uuid, Model model, @AuthenticationPrincipal AuthUserDetails userDetails, @ModelAttribute ProductDto productDto) {
+    public String register(@PathVariable String uuid, @AuthenticationPrincipal AuthUserDetails userDetails, @ModelAttribute ProductDto productDto) {
         var restaurant = restaurantRepository.find(UUID.fromString(uuid));
 
         return restaurant.map(r -> {
@@ -81,8 +95,50 @@ public class RestaurantController {
                 var image = storageService.save(productDto.getImage());
                 var product = modelMapper.map(productDto, Product.class);
                 product.setImage(image);
-                r.getMenu().add(product);
-                restaurantRepository.update(UUID.fromString(uuid), r);
+                product.setRestaurantUuid(r.getUuid());
+                productRepository.save(product);
+                return "redirect:/restaurant/" + uuid;
+            }
+            return "redirect:/";
+        }).orElse("redirect:/");
+    }
+
+    @GetMapping("/{uuid}/edit/{productUuid}")
+    public String edit(@PathVariable String uuid, @PathVariable String productUuid, Model model, @AuthenticationPrincipal AuthUserDetails userDetails) {
+
+        var restaurant = restaurantRepository.find(UUID.fromString(uuid));
+
+        return restaurant.map(r -> {
+            if(r.getUserUuid().equals(userDetails.getUUID())) {
+                var product = productRepository.find(UUID.fromString(productUuid));
+                var productDto = modelMapper.map(product.get(), ProductDto.class);
+
+                model.addAttribute("productDto", productDto);
+                model.addAttribute("restaurant", r);
+                model.addAttribute("url", "/restaurant/" + r.getUuid() + "/edit/" + productDto.getUuid());
+                return "restaurant/product/register";
+            }
+            return "redirect:/";
+        }).orElse("redirect:/");
+    }
+
+    @PostMapping("/{uuid}/edit/{productUuid}")
+    public String edit(@PathVariable String uuid, @PathVariable String productUuid, Model model, @AuthenticationPrincipal AuthUserDetails userDetails, @ModelAttribute ProductDto productDto) {
+        var restaurant = restaurantRepository.find(UUID.fromString(uuid));
+
+        return restaurant.map(r -> {
+            if(r.getUserUuid().equals(userDetails.getUUID())) {
+                var product = modelMapper.map(productDto, Product.class);
+                product.setRestaurantUuid(r.getUuid());
+
+                if (!productDto.getImage().isEmpty()) {
+                    var image = (product.getImage() != null)
+                            ? storageService.update(product.getImage(), productDto.getImage())
+                            : storageService.save(productDto.getImage());
+                    product.setImage(image);
+                }
+
+                productRepository.update(product.getUuid(), product);
                 return "redirect:/restaurant/" + uuid;
             }
             return "redirect:/";
@@ -112,8 +168,7 @@ public class RestaurantController {
         restaurant.setUserUuid(userDetails.getUUID());
         var image = storageService.save(restaurantRegisterDto.getImage());
         restaurant.setImage(image);
-        restaurant.setMenu(new ArrayList<>());
         var restaurantUuid = restaurantRepository.save(restaurant);
-        return "redirect:/restaurant/profile/" + restaurantUuid;
+        return "redirect:/restaurant/" + restaurantUuid;
     }
 }

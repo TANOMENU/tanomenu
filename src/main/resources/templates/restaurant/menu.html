@@ -29,7 +29,8 @@
 
             <section class="restaurant-menu-main-content">
                 <!--/*@thymesVar id="menu" type="java.util.Map<tanomenu.core.entity.restaurant.CategoryProduct, java.util.List<tanomenu.core.entity.restaurant.Product>"*/-->
-                <a th:href="@{/restaurant/{uuid}/register/ (uuid=${restaurant.uuid})}" style="text-decoration: none; color: black;">+ Criar Prato</a>
+                <!--/*@thymesVar id="validate" type="java.lang.Boolean"*/-->
+                <a th:if="${validate}" th:href="@{/restaurant/{uuid}/register/ (uuid=${restaurant.uuid})}" style="text-decoration: none; color: black;">+ Criar Prato</a>
                 <ul th:each="entry, stat :${menu}">
                     <h2 th:text="${entry.key.toString().toUpperCase()}">Seção do Menu</h2>
                     <li th:each="product :${entry.value}">
@@ -38,7 +39,7 @@
                     </li>
                 </ul>
 
-                <th:block th:unless="${restaurant.getMenu()}">
+                <th:block th:unless="${menu}">
                     <th:block th:replace="_layout/common :: ooops('Não encontramos nada para mostrar')" />
                 </th:block>
             </section>
