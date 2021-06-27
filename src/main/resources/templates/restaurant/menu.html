@@ -30,7 +30,14 @@
             <section class="restaurant-menu-main-content">
                 <!--/*@thymesVar id="menu" type="java.util.Map<tanomenu.core.entity.restaurant.CategoryProduct, java.util.List<tanomenu.core.entity.restaurant.Product>"*/-->
                 <!--/*@thymesVar id="validate" type="java.lang.Boolean"*/-->
-                <a th:if="${validate}" th:href="@{/restaurant/{uuid}/register/ (uuid=${restaurant.uuid})}" style="text-decoration: none; color: black;">+ Criar Prato</a>
+                <div class="contact" style="display: flex; align-items: center; justify-content: center">
+                    <a th:if="${validate}" th:href="@{/restaurant/{uuid}/register/ (uuid=${restaurant.uuid})}" style="text-decoration: none; color: black; margin-right: auto;">+ Criar Prato</a>
+                    <span th:if="${!validate}" class="material-icons">call</span>
+                    <p th:if="${!validate}" th:text="${restaurant.phone}" style="margin-right: auto;">Numero do restaurante</p>
+                    <span th:if="${!validate}" class="material-icons">place</span>
+                    <p th:if="${!validate}" th:text="${restaurant.address.neighborhood} + ' ' + ${restaurant.address.city}+'-'+${restaurant.address.state.code}"></p>
+                </div>
+
                 <ul th:each="entry, stat :${menu}">
                     <h2 th:text="${entry.key.getValue().toUpperCase()}">Seção do Menu</h2>
                     <li th:each="product :${entry.value}">
