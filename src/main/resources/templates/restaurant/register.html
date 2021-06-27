@@ -12,6 +12,7 @@
             <h1 class="page-title">Cadastrar Restaurante</h1>
 
             <form method="post" th:action="@{/restaurant/register}" th:object="${restaurantRegisterDto}" enctype="multipart/form-data">
+                <img th:src="${image} ? @{/upload/{uuid} (uuid=${image})} : @{/img/user-icon.png}" style="width: 150px; height: 150px; border-radius: 50%">
                 <div class="fieldsets-container" >
                     <fieldset style="margin-right: 30px;">
                         <label class="field">
@@ -82,6 +83,20 @@
                 </div>
                 <button type="submit" class="button submit">Continuar</button>
             </form>
+
+            <script>
+                (() => {
+                    function preview_image(event) {
+                        const img = document.querySelector('.register-restaurant form img');
+                        const reader = new FileReader();
+                        reader.onload = () => img.src = reader.result;
+                        reader.readAsDataURL(event.target.files[0]);
+                    }
+
+                    const input = document.querySelector('.register-restaurant form input[type="file"]');
+                    input.onchange = preview_image
+                })()
+            </script>
         </main>
 
     </body>
