@@ -24,11 +24,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .authorizeRequests()
-                .antMatchers("/css/**", "/img/**", "/lib/**", "/login", "/sign-up").permitAll()
+            .authorizeRequests()
+                .antMatchers("/css/**", "/img/**", "/lib/**", "/login", "/sign-up", "/").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
+            .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/")
                 .usernameParameter("email")
@@ -36,12 +36,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error=true")
                 .permitAll()
                 .and()
-                .logout()
+            .logout()
                 .logoutSuccessUrl("/login?logout=true")
                 .invalidateHttpSession(true)
                 .permitAll()
                 .and()
-                .csrf()
+            .csrf()
                 .disable();
     }
 
