@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+    <head>
+        <th:block th:replace="_layout/common :: myHead" />
+        <title>TANOMENU</title>
+        <th:block th:replace="_layout/common :: flickityMetaCss" />
+        <link href="/css/home.css" rel="stylesheet">
+        <link href="/css/index.css" rel="stylesheet">
+    </head>
+    <body class="base base-background-color">
+        <th:block th:replace="_layout/common :: myHeader" />
+
+        <main>
+
+            <section class="greetings">
+                <h2>Dê uma olhada nesses lugares em destaque...</h2>
+
+                <div class="home-page-section-restaurants js-flickity" data-flickity='{ "cellAlign": "center", "freeScroll": true, "pageDots": false, "prevNextButtons": false, "contain": true, "groupCells": true }'>
+                    <div class="home-page-section-restaurant" th:each="restaurant :${featuredRestaurants}">
+                        <a th:href="@{restaurant/{uuid}(uuid=${restaurant.uuid})}"
+                           th:title="${restaurant.tradeName}"
+                           th:style="'background-image: url(/upload/' + ${restaurant.image} + ')'"
+                        >
+                            <h4 th:text="${restaurant.tradeName}"></h4>
+                        </a>
+                    </div>
+                </div>
+
+                <nav>
+                    <a class="button" th:href="@{/login}">Entrar</a>
+                    <a class="button" th:href="@{/sign-up}">Criar conta</a>
+                </nav>
+            </section>
+
+            <section style="background-image: url('/img/index/fundo1.png')">
+                <img src="/img/index/pess1.png">
+                <h3>Os melhores cardápios a um clique de distância</h3>
+            </section>
+
+            <section style="background-image: url('img/index/fundo2.png')">
+                <img src="/img/index/pess2.0.png">
+                <h3>Compartilhe o que TANOMENU na janta de hoje</h3>
+            </section>
+
+            <section style="background-image: url('/img/index/fundo3.png')">
+                <img src="/img/index/pess3.png">
+                <h3>Compartilhe o que TANOMENU na janta de hoje</h3>
+            </section>
+
+            <section style="background-image: url('/img/index/fundo4.png')">
+                <img src="/img/index/pess4.png">
+                <h3>O melhor prato TANOMENU do seu restaurante</h3>
+            </section>
+
+        </main>
+        <th:block th:replace="_layout/common :: flickityMetaJs" />
+    </body>
+</html>
