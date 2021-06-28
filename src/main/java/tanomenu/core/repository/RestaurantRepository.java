@@ -38,7 +38,6 @@ public class RestaurantRepository extends Repository<Restaurant> {
 
     public List<Restaurant> shuffle(int limit) {
         return getStream()
-                .limit(limit * 2L)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), collected -> {
                     Collections.shuffle(collected);
                     return collected.stream();

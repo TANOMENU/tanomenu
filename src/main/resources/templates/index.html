@@ -11,7 +11,6 @@
         <th:block th:replace="_layout/common :: myHeader" />
 
         <main>
-
             <section class="greetings">
                 <h2>Dê uma olhada nesses lugares em destaque...</h2>
 
@@ -26,33 +25,37 @@
                     </div>
                 </div>
 
+                <h3>Têm um negócio? <a class="link" th:href="@{/restaurant/register}">Traga-o para o TANOMENU</a></a></h3>
+
                 <nav>
                     <a class="button" th:href="@{/login}">Entrar</a>
                     <a class="button" th:href="@{/sign-up}">Criar conta</a>
                 </nav>
             </section>
 
-            <section style="background-image: url('/img/index/fundo1.png')">
+            <section class="slide slide-reverse" style="background-image: url('/img/index/fundo1.png')">
                 <img src="/img/index/pess1.png">
                 <h3>Os melhores cardápios a um clique de distância</h3>
             </section>
 
-            <section style="background-image: url('img/index/fundo2.png')">
+            <section class="slide" style="background-image: url('img/index/fundo2.png')">
                 <img src="/img/index/pess2.0.png">
                 <h3>Compartilhe o que TANOMENU na janta de hoje</h3>
             </section>
 
-            <section style="background-image: url('/img/index/fundo3.png')">
+            <section class="slide slide-reverse" style="background-image: url('/img/index/fundo3.png')">
                 <img src="/img/index/pess3.png">
-                <h3>Compartilhe o que TANOMENU na janta de hoje</h3>
+                <h3>O próximo encontro com os amigos TANOMENU</h3>
             </section>
 
-            <section style="background-image: url('/img/index/fundo4.png')">
+            <section class="slide" style="background-image: url('/img/index/fundo4.png')">
                 <img src="/img/index/pess4.png">
                 <h3>O melhor prato TANOMENU do seu restaurante</h3>
             </section>
-
         </main>
+
+        <th:block th:replace="_layout/common :: myFooter" />
+
         <th:block th:replace="_layout/common :: flickityMetaJs" />
     </body>
 </html>

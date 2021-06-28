@@ -21,7 +21,7 @@ public class IndexController {
         if (authUserDetails != null)
             return "redirect:/home";
 
-        var featured = restaurantRepository.shuffle(10);
+        var featured = restaurantRepository.shuffle(7);
         model.addAttribute("featuredRestaurants", featured);
         return "index";
     }
