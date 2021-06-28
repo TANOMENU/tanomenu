@@ -42,9 +42,12 @@
                     <h2 th:text="${entry.key.getValue().toUpperCase()}">Seção do Menu</h2>
                     <li th:each="product :${entry.value}">
                         <h3><span th:text="${product.name}">Nome do produto</span> R$ <th:block th:text="${product.price}" /></h3>
-                        <div style="display: flex;">
+                        <div style="display: flex;" class="icons">
                             <p th:text="${product.description}">Descrição dos ingredientes, preparos, receita, etc.</p>
-                            <a th:if="${validate}" th:href="@{/restaurant/{uuidR}/edit/{uuidP} (uuidR=${restaurant.uuid}, uuidP=${product.uuid}) }" style="position: relative; margin-left: auto; top: -25px; right: -40px;"><img class="icon" src="/img/icons/Pencil.svg"></a>
+                            <a th:if="${validate}" th:href="@{/restaurant/{uuidR}/edit/{uuidP} (uuidR=${restaurant.uuid}, uuidP=${product.uuid}) }"><img class="icon" src="/img/icons/Pencil.svg"></a>
+                            <a class="delete" th:if="${validate}" th:href="@{/restaurant/{uuidR}/delete/{uuidP} (uuidR=${restaurant.uuid}, uuidP=${product.uuid})}" >
+                                <span class="material-icons">close</span>
+                            </a>
                         </div>
                     </li>
                 </ul>
