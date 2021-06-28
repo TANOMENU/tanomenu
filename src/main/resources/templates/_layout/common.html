@@ -20,7 +20,7 @@
     <header th:fragment="myHeader" class="base-header" >
         <a class="base-logo" href="/"><img src="/img/logo.png" alt="TANOMENU"></a>
 
-        <form class="search-box" action="/search" method="get">
+        <form sec:authorize="isAuthenticated()" class="search-box" action="/search" method="get">
             <input type="text" placeholder="Pesquisar locais..." name="q">
             <button type="submit">
                 <span class="material-icons">search</span>
