@@ -15,7 +15,7 @@
             <section class="restaurant-menu-main-top">
                 <h1 th:text="${restaurant.tradeName}">Nome do Restaurante</h1>
 
-                <div th:if="${gallery}" class="gallery js-flickity" data-flickity='{ "wrapAround": true, "contain": true }'>
+                <div th:if="${gallery}" class="gallery js-flickity" data-flickity='{ "wrapAround": true, "contain": true, "autoPlay": true }'>
                     <div class="gallery-cell"
                          th:each="product :${gallery}"
                          th:style="'background-image: url(/upload/' + ${product.image} + ')'"

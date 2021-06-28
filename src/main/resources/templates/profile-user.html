@@ -50,7 +50,11 @@
                         </label>
                     </fieldset>
                 </div>
-                <button type="submit" class="button">Continuar</button>
+                <div class="buttons" style="display: flex;">
+                    <a class="delete-user" th:href="@{/profile/user/delete}">Excluir</a>
+                    <button type="submit" class="button">Continuar</button>
+                </div>
+
             </form>
 
             <script>
