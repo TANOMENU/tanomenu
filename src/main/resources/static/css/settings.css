@@ -83,3 +83,16 @@
 .settings-page-right form .button {
     margin-left: auto;
 }
+
+.delete-user {
+    border-radius: 10px;
+    background: var(--secondary-color);
+    font-size: 20px;
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    margin: 10px 0;
+    width: auto;
+    text-decoration: none;
+    margin-right: auto;
+}
