@@ -3,6 +3,7 @@ package tanomenu.core;
 import javax.annotation.PreDestroy;
 import java.io.*;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 

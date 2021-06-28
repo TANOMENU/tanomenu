@@ -3,10 +3,8 @@ package tanomenu.core.repository;
 import org.springframework.stereotype.Service;
 import tanomenu.core.Repository;
 import tanomenu.core.entity.Restaurant;
-import tanomenu.core.entity.restaurant.Product;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;

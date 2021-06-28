@@ -19,6 +19,29 @@
     text-align: center;
 }
 
+.icons {
+    display: flex;
+}
+
+.icons a {
+    position: relative;
+    margin-left: auto;
+    top: -35px;
+    right: -100px;
+    text-decoration: none;
+    color: #828282;
+    padding: 10px;
+}
+
+.icons .delete {
+    margin: 0;
+}
+
+.icons a:hover {
+    background-color: #c9c9c9;
+    border-radius: 10%;
+}
+
 .restaurant-menu-main-top .gallery {
     width: 800px;
     height: 230px;

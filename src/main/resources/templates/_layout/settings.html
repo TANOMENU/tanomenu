@@ -24,10 +24,14 @@
 
                 <ul th:with="restaurants=${@restaurantRepository.findByOwner(user.uuid)}">
                     <span>Estabelecimentos</span>
-                    <li th:each="restaurant: ${restaurants}">
+                    <li th:each="restaurant: ${restaurants}" style="display: flex;">
                         <a th:href="@{/restaurant/profile/edit/{uuid} (uuid=${restaurant.uuid})}">
                             <span class="material-icons">store</span> <th:block th:text="${restaurant.tradeName}" />
                         </a>
+                        <a th:href="@{/restaurant/{uuid}/delete/ (uuid=${restaurant.uuid})}" style="width: auto; margin-left: auto; margin-right: 10px">
+                            <span class="material-icons">close</span>
+                        </a>
+
                     </li>
                 </ul>
             </nav>

@@ -166,4 +166,46 @@ public class RestaurantController {
         var restaurantUuid = restaurantRepository.save(restaurant);
         return "redirect:/restaurant/" + restaurantUuid;
     }
+
+    @GetMapping("/{uuid}/delete")
+    public String delete(@PathVariable String uuid, @AuthenticationPrincipal AuthUserDetails userDetails) {
+        var restaurant = restaurantRepository.find(UUID.fromString(uuid));
+        var products = productRepository.findByRestaurant(UUID.fromString(uuid));
+
+        return restaurant.map(r -> {
+            if(r.getUserUuid().equals(userDetails.getUUID())) {
+                for (Product product: products) {
+                    if(product.getImage() != null) {
+                        storageService.delete(product.getImage());
+                    }
+                    productRepository.delete(product.getUuid());
+                }
+                if(r.getImage() != null)
+                    storageService.delete(r.getImage());
+
+                restaurantRepository.delete(r.getUuid());
+                return "redirect:/profile";
+            }
+            return "redirect:/";
+        }).orElse("redirect:/");
+    }
+
+    @GetMapping("{uuidR}/delete/{uuidP}")
+    public String delete(@PathVariable String uuidR, @PathVariable String uuidP, @AuthenticationPrincipal AuthUserDetails userDetails) {
+        var restaurant = restaurantRepository.find(UUID.fromString(uuidR));
+        var product = productRepository.find(UUID.fromString(uuidP));
+
+        return restaurant.map(r -> {
+            if(r.getUserUuid().equals(userDetails.getUUID())) {
+                product.ifPresent(p -> {
+                    if(p.getImage() != null)
+                        storageService.delete(p.getImage());
+
+                    productRepository.delete(p.getUuid());
+                });
+                return "redirect:/restaurant/"+r.getUuid();
+            }
+            return "redirect:/restaurant/"+r.getUuid();
+        }).orElse("redirect:/");
+    }
 }
