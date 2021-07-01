@@ -1,0 +1,14 @@
+[Unit]
+Description=TANOMENU App
+After=syslog.target network.target
+
+[Service]
+SuccessExitStatus=143
+
+WorkingDirectory=/home/jlucasrods/source/build/libs
+ExecStart=/bin/java -jar tanomenu-0.0.1-SNAPSHOT.jar --server.port=80
+ExecStop=/bin/kill -15 $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+
